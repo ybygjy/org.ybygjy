@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+	<bean id="hessianProxyFactory" class="com.caucho.hessian.client.HessianProxyFactory">
+		<property name="connectTimeout" value="30000"></property>
+		<property name="readTimeout" value="15000"></property>
+	</bean>
+	<bean name="userService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="http://localhost:7002/hessian/userService"></property>
+		<property name="serviceInterface" value="org.ybygjy.hessian.service.UserService"></property>
+		<property name="proxyFactory" ref="hessianProxyFactory"></property>
+	</bean>
+</beans>
