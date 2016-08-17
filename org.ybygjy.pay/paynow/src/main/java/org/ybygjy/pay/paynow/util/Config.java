@@ -17,6 +17,8 @@ public class Config {
     public static final String KEY_AGENTPAY_URL = "org.ybygjy.pay.paynow.agentpay.url";
     public static final String KEY_AGENTPAY_QUERY_URL = "org.ybygjy.pay.paynow.agentpay.query.url";
     public static final String KEY_ACCOUNTBALANCE_QUERY_URL = "org.ybygjy.pay.paynow.agentpay.accountbalance.query.url";
+    public static final String KEY_PAYEECARDNO = "org.ybygjy.pay.paynow.payeecardno";
+    public static final String KEY_PAYEECARDUNIONNO = "org.ybygjy.pay.paynow.payeecardunionno";
     private static String confFilePath = "gateway/pay-now.properties";
     private Properties properties = new Properties();
     private static final Config instance;
