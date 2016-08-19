@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.ybygjy.hessian</groupId>
+    <artifactId>hessian</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name></name>
+    <repositories>
+    	<!-- 
+    	<repository>
+    		<id>mlspay</id>
+    		<url>http://maven.repository.ybygjy.org/mlspay-libs-repo</url>
+        </repository>
+    	 -->
+        <repository>
+			<id>mpay-maven.ybygjy.org</id>
+			<name>mpay-maven.ybygjy.org-snapshots</name>
+			<url>http://maven.repository.ybygjy.org/private-internal-snapshots</url>
+    		<snapshots>
+    			<enabled>true</enabled>
+    		</snapshots>
+    	</repository>
+    </repositories>
+   	<distributionManagement>
+		<repository>
+			<id>mpay-maven.ybygjy.org</id>
+			<name>mpay-maven.ybygjy.org-releases</name>
+			<url>http://maven.repository.ybygjy.org/private-internal-releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>mpay-maven.ybygjy.org</id>
+			<name>mpay-maven.ybygjy.org-snapshots</name>
+			<url>http://maven.repository.ybygjy.org/private-internal-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+    <modules>
+    	<module>hessian-remote</module>
+    	<module>hessian-service</module>
+    	<module>hessian-test</module>
+    </modules>
+</project>
