@@ -4,15 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
       <groupId>org.ybygjy</groupId>
-      <artifactId>org.ybygjy</artifactId>
+      <artifactId>org.ybygjy.basic</artifactId>
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>org.ybygjy.basic</artifactId>
+    <artifactId>network</artifactId>
     <packaging>pom</packaging>
-    <name>basic</name>
-    <modules>
-        <module>algorithm</module>
-        <module>network</module>
-    </modules>
+    <name>network</name>
 </project>
