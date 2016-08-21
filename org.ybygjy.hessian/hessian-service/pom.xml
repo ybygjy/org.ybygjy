@@ -3,25 +3,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>hessian-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<packaging>war</packaging>
 	<parent>
 		<groupId>org.ybygjy.hessian</groupId>
 		<artifactId>hessian</artifactId>
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	<build>
+		<finalName>hessian-service</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -71,7 +68,7 @@
 		<dependency>
 			<groupId>org.ybygjy.hessian</groupId>
 			<artifactId>hessian-remote</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -85,5 +82,4 @@
 			<version>4.0.38</version>
 		</dependency>
 	</dependencies>
-	<packaging>war</packaging>
 </project>
