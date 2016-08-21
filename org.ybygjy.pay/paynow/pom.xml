@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.ybygjy</groupId>
-		<artifactId>pay</artifactId>
+		<artifactId>org.ybygjy.pay</artifactId>
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>paynow</artifactId>
-	<packaging>war</packaging>
 	<name>paynow</name>
+	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>
 	<build>
 		<finalName>paynow</finalName>
@@ -18,10 +18,6 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat6-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

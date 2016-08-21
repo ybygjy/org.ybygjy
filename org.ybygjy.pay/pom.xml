@@ -8,10 +8,9 @@
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
     <artifactId>org.ybygjy.pay</artifactId>
     <name>org.ybygjy.pay</name>
+    <packaging>pom</packaging>
     <modules>
     	<module>paynow</module>
     </modules>
