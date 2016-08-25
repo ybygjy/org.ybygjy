@@ -7,10 +7,13 @@ var superagent = require('superagent');
 var concurrentCount = 0;
 function fetchUrl(url, callback) {
     var startTime = Date.now();
+    var rtnObj = new Object();
+    concurrentCount++;
     superagent.get(url).end(function(err,sres){
-        if (err) {
-            return next(err);
-        }
+        //if (err) {
+        //    console.log(url, err);
+        //    return null;//console.error(err); 
+        //}
         var $ = cheerio.load(sres.text);
         var title = $('.topic_full_title').text().trim();
         var author = $('.user_name .dark').text().trim();
@@ -20,21 +23,22 @@ function fetchUrl(url, callback) {
         if (match) {
             score = match[1];
         }
-        callback({
-            title:title,
-            author:author,
-            score:score
-        });
+        rtnObj = {title:title,author:author,score:score};
+        var endTime = Date.now();
+        var delay = (endTime - startTime)/1000;
+        console.log('现在的并发连接数是：', concurrentCount, '正在抓取的Url是：', url, '耗时：', delay);
+        concurrentCount--;
+        callback(null,[rtnObj]);
     });
-    var endTime = Date.now();
-    var delay = (endTime - startTime)/1000;
-    concurrentCount++;
-    console.log('现在的并发连接数是：', concurrentCount, '正在抓取的Url是：', url, '耗时：', delay);
 }
 var urls = [];
 var serviceUrl = 'https://cnodejs.org/';
 var eventProxy = new eventproxy();
+eventProxy.all('event_html',function(reqData){
+    console.log('return result :: ', reqData);
+});
 function parseUrls(url) {
+    var urls = [];
     superagent.get(url).end(function(err, sres){
         if (err) {
             return next(err);
@@ -44,9 +48,6 @@ function parseUrls(url) {
             var $element = $(element);
             var tmpUrl = urlObj.resolve(serviceUrl, $element.attr('href'));
             urls.push(tmpUrl);
-        });
-        eventProxy.all('event_html',function(reqData){
-            console.log(reqData);
         });
         async.mapLimit(urls, 5, function(url, callback){
             fetchUrl(url, callback);
