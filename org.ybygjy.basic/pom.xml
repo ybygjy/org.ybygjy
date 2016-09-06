@@ -14,5 +14,6 @@
     <modules>
         <module>algorithm</module>
         <module>network</module>
+        <module>basic</module>
     </modules>
 </project>
