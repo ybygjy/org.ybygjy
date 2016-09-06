@@ -1,11 +1,9 @@
-package org.ybygjy.basic.thrift;
+package org.ybygjy.thrift;
 
 import java.util.HashMap;
 
-import org.ybygjy.basic.thrift.tutorial.*;
-import org.ybygjy.basic.thrift.shared.SharedStruct;
-import org.ybygjy.basic.thrift.tutorial.InvalidOperation;
-import org.ybygjy.basic.thrift.tutorial.Work;
+import org.ybygjy.thrift.shared.SharedStruct;
+import org.ybygjy.thrift.tutorial.*;
 
 public class CalculatorHandler implements Calculator.Iface {
     private HashMap<Integer, SharedStruct> log;

@@ -1,4 +1,4 @@
-package org.ybygjy.basic.thrift;
+package org.ybygjy.thrift;
 
 import java.net.URL;
 
@@ -10,10 +10,10 @@ import org.apache.thrift.transport.TSSLTransportFactory.TSSLTransportParameters;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.ybygjy.basic.thrift.shared.SharedStruct;
-import org.ybygjy.basic.thrift.tutorial.Calculator;
-import org.ybygjy.basic.thrift.tutorial.Operation;
-import org.ybygjy.basic.thrift.tutorial.Work;
+import org.ybygjy.thrift.shared.SharedStruct;
+import org.ybygjy.thrift.tutorial.Calculator;
+import org.ybygjy.thrift.tutorial.Operation;
+import org.ybygjy.thrift.tutorial.Work;
 
 /**
  * Thrift Client

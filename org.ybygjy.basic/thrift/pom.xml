@@ -8,8 +8,8 @@
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>basic</artifactId>
-	<name>basic</name>
+	<artifactId>thrift</artifactId>
+	<name>thrift</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.thrift</groupId>

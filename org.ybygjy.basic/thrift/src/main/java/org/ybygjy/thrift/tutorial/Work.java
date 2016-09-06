@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package org.ybygjy.basic.thrift.tutorial;
+package org.ybygjy.thrift.tutorial;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -607,7 +607,7 @@ public class Work implements org.apache.thrift.TBase<Work, Work._Fields>, java.i
             break;
           case 3: // OP
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.op = org.ybygjy.basic.thrift.tutorial.Operation.findByValue(iprot.readI32());
+              struct.op = org.ybygjy.thrift.tutorial.Operation.findByValue(iprot.readI32());
               struct.setOpIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -712,7 +712,7 @@ public class Work implements org.apache.thrift.TBase<Work, Work._Fields>, java.i
         struct.setNum2IsSet(true);
       }
       if (incoming.get(2)) {
-        struct.op = org.ybygjy.basic.thrift.tutorial.Operation.findByValue(iprot.readI32());
+        struct.op = org.ybygjy.thrift.tutorial.Operation.findByValue(iprot.readI32());
         struct.setOpIsSet(true);
       }
       if (incoming.get(3)) {

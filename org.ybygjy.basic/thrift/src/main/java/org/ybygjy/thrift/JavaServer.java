@@ -1,4 +1,4 @@
-package org.ybygjy.basic.thrift;
+package org.ybygjy.thrift;
 
 import java.net.URL;
 
@@ -9,8 +9,8 @@ import org.apache.thrift.transport.TSSLTransportFactory;
 import org.apache.thrift.transport.TSSLTransportFactory.TSSLTransportParameters;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
-import org.ybygjy.basic.thrift.tutorial.Calculator;
-import org.ybygjy.basic.thrift.tutorial.Calculator.Iface;
+import org.ybygjy.thrift.tutorial.Calculator;
+import org.ybygjy.thrift.tutorial.Calculator.Iface;
 
 /**
  * Thrift 学习
