@@ -1,4 +1,4 @@
-package org.ybygjy.pay.paynow.dto;
+package org.ybygjy.pay.dto;
 
 /**
  * 账户余额查询响应

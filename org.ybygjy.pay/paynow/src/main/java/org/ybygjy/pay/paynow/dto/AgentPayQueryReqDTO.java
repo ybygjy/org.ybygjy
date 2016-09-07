@@ -3,6 +3,8 @@ package org.ybygjy.pay.paynow.dto;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ybygjy.pay.dto.AbstractPayReqDTO;
+
 /**
  * 代付交易状态查询
  * @author WangYanCheng

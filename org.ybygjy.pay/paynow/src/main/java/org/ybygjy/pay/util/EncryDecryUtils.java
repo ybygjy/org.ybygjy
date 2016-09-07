@@ -1,4 +1,4 @@
-package org.ybygjy.pay.paynow.util;
+package org.ybygjy.pay.util;
 
 import java.nio.charset.Charset;
 

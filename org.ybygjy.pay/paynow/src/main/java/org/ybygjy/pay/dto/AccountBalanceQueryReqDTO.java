@@ -1,4 +1,4 @@
-package org.ybygjy.pay.paynow.dto;
+package org.ybygjy.pay.dto;
 
 import java.util.HashMap;
 import java.util.Map;

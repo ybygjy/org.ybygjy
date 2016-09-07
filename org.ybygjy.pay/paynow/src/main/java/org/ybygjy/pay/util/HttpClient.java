@@ -1,4 +1,4 @@
-package org.ybygjy.pay.paynow.util;
+package org.ybygjy.pay.util;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;

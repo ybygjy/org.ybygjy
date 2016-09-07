@@ -1,7 +1,7 @@
 package org.ybygjy.pay.paynow;
 
-import org.ybygjy.pay.paynow.dto.AccountBalanceQueryRepDTO;
-import org.ybygjy.pay.paynow.dto.AccountBalanceQueryReqDTO;
+import org.ybygjy.pay.dto.AccountBalanceQueryRepDTO;
+import org.ybygjy.pay.dto.AccountBalanceQueryReqDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayQueryRepDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayQueryReqDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayRepDTO;

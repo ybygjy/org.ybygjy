@@ -9,16 +9,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.ybygjy.pay.dto.AbstractPayRepDTO;
+import org.ybygjy.pay.dto.AccountBalanceQueryRepDTO;
+import org.ybygjy.pay.dto.AccountBalanceQueryReqDTO;
+import org.ybygjy.pay.dto.TradeStatusEnum;
 import org.ybygjy.pay.paynow.PayNowService;
-import org.ybygjy.pay.paynow.dto.AbstractPayRepDTO;
-import org.ybygjy.pay.paynow.dto.AccountBalanceQueryRepDTO;
-import org.ybygjy.pay.paynow.dto.AccountBalanceQueryReqDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayQueryRepDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayQueryReqDTO;
 import org.ybygjy.pay.paynow.dto.AgentPayReqDTO;
-import org.ybygjy.pay.paynow.dto.TradeStatusEnum;
 import org.ybygjy.pay.paynow.util.Config;
-import org.ybygjy.pay.paynow.util.DateUtil;
+import org.ybygjy.pay.util.DateUtil;
 
 /**
  * 现在支付

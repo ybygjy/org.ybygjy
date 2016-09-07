@@ -1,5 +1,7 @@
 package org.ybygjy.pay.paynow.dto;
 
+import org.ybygjy.pay.dto.AbstractPayRepDTO;
+
 
 /**
  * 代付交易响应实体
