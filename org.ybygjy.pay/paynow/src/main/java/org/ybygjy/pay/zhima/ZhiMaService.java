@@ -1,5 +1,8 @@
 package org.ybygjy.pay.zhima;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,6 +31,29 @@ public class ZhiMaService {
         dataMap.put("params", "");
         dataMap.put("sign", "");
         dataMap.put("ext_params", "");
+        Map<String, String> innerDataMap = new TreeMap<String, String>();
+        innerDataMap.put("transaction_id", "");
+        innerDataMap.put("contract_flag", "");
+        innerDataMap.put("product_code", "");
+        innerDataMap.put("identity_type", "");
+        innerDataMap.put("identity_param", "");
+        innerDataMap.put("state", "");
+        innerDataMap.put("biz_params", "");
+        innerDataMap.put("source_type", "");
+        innerDataMap.put("page_url", "");
+        innerDataMap.put("schema_url", "");
         return null;
+    }
+    private String generateKey2Value(Map<String, String> dataMap) {
+        StringBuilder sbud = new StringBuilder();
+        for (Iterator<String> iterator = dataMap.keySet().iterator(); iterator.hasNext();) {
+            String keys = iterator.next();
+            try {
+                sbud.append(keys).append("&").append(URLEncoder.encode(dataMap.get(keys), "utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return sbud.toString();
     }
 }

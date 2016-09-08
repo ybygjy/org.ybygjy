@@ -4,17 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
       <groupId>org.ybygjy</groupId>
-      <artifactId>org.ybygjy</artifactId>
+      <artifactId>org.ybygjy.basic</artifactId>
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>org.ybygjy.basic</artifactId>
-    <packaging>pom</packaging>
-    <name>basic</name>
-    <modules>
-        <module>algorithm</module>
-        <module>network</module>
-        <module>thrift</module>
-        <module>jvm</module>
-    </modules>
+    <artifactId>jvm</artifactId>
+    <packaging>jar</packaging>
+    <name>jvm</name>
 </project>
