@@ -10,8 +10,10 @@ import java.util.Map;
  * @version 2016年8月3日
  */
 public class AbstractPayRepDTO {
-    /** 响应编码 */
-    private int rtnCode;
+    /** 错误码*/
+    private String errorCode;
+    /** 错误信息*/
+    private String errorMessage;
     /** 响应时间 */
     private Date rtnDate;
     /** 响应内容 */
@@ -20,14 +22,6 @@ public class AbstractPayRepDTO {
     private TradeStatusEnum rtnStatus;
     /** 扩展内容 */
     private Map<String, String> extData = new HashMap<String, String>();
-
-    public int getRtnCode() {
-        return rtnCode;
-    }
-
-    public void setRtnCode(int rtnCode) {
-        this.rtnCode = rtnCode;
-    }
 
     public Date getRtnDate() {
         return rtnDate;
@@ -51,7 +45,22 @@ public class AbstractPayRepDTO {
 
     public void setRtnStatus(TradeStatusEnum rtnStatus) {
         this.rtnStatus = rtnStatus;
-        this.rtnCode = rtnStatus.value();
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public Map<String, String> getExtData() {

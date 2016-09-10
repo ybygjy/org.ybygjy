@@ -1,12 +1,17 @@
 package org.ybygjy.pay.zhima;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Date;
 
-import org.ybygjy.pay.dto.AbstractPayReqDTO;
+import org.ybygjy.pay.dto.TradeStatusEnum;
+import org.ybygjy.pay.dto.ZhiMaRepDTO;
+import org.ybygjy.pay.dto.ZhiMaReqDTO;
+
+import com.antgroup.zmxy.openplatform.api.DefaultZhimaClient;
+import com.antgroup.zmxy.openplatform.api.ZhimaApiException;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCustomerCertifyApplyRequest;
+import com.antgroup.zmxy.openplatform.api.request.ZhimaCustomerCertifyInitialRequest;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaCustomerCertifyApplyResponse;
+import com.antgroup.zmxy.openplatform.api.response.ZhimaCustomerCertifyInitialResponse;
 
 /**
  * 芝麻服务接口
@@ -15,45 +20,66 @@ import org.ybygjy.pay.dto.AbstractPayReqDTO;
  */
 public class ZhiMaService {
     /**
-     * 初始化接口
-     * @param dataMap
-     * @return rtnStr
+     * 芝麻认证服务数据初始化接口
+     * @param zhiMaReqDto {@link ZhiMaReqDTO}
+     * @return rtnObj {@link ZhiMaRepDTO}
      */
-    public String certifyInitial(AbstractPayReqDTO reqDto) {
-        String serviceUrl = reqDto.getServiceUri();
-        Map<String, String> dataMap = new TreeMap<String, String>();
-        dataMap.put("app_id", "");
-        dataMap.put("charset", "utf-8");
-        dataMap.put("method", "zhima.customer.certify.initial");
-        dataMap.put("version", "1.0");
-        dataMap.put("channel", "api");
-        dataMap.put("platform", "zmop");
-        dataMap.put("params", "");
-        dataMap.put("sign", "");
-        dataMap.put("ext_params", "");
-        Map<String, String> innerDataMap = new TreeMap<String, String>();
-        innerDataMap.put("transaction_id", "");
-        innerDataMap.put("contract_flag", "");
-        innerDataMap.put("product_code", "");
-        innerDataMap.put("identity_type", "");
-        innerDataMap.put("identity_param", "");
-        innerDataMap.put("state", "");
-        innerDataMap.put("biz_params", "");
-        innerDataMap.put("source_type", "");
-        innerDataMap.put("page_url", "");
-        innerDataMap.put("schema_url", "");
-        return null;
-    }
-    private String generateKey2Value(Map<String, String> dataMap) {
-        StringBuilder sbud = new StringBuilder();
-        for (Iterator<String> iterator = dataMap.keySet().iterator(); iterator.hasNext();) {
-            String keys = iterator.next();
-            try {
-                sbud.append(keys).append("&").append(URLEncoder.encode(dataMap.get(keys), "utf-8"));
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+    public ZhiMaRepDTO certifyInitial(ZhiMaReqDTO zhiMaReqDto) {
+        ZhimaCustomerCertifyInitialRequest req = new ZhimaCustomerCertifyInitialRequest();
+        req.setChannel(zhiMaReqDto.getChannel());
+        req.setPlatform(zhiMaReqDto.getPlateform());
+        req.setTransactionId(zhiMaReqDto.getTransactionId());
+        req.setContractFlag(zhiMaReqDto.getContractFlag());
+        req.setProductCode(zhiMaReqDto.getProductCode());
+        req.setIdentityType(zhiMaReqDto.getIdentityType());
+        req.setIdentityParam(zhiMaReqDto.getIdentityParam());
+        req.setState(zhiMaReqDto.getState());
+        req.setBizParams(zhiMaReqDto.getBizParams());
+        req.setSourceType(zhiMaReqDto.getSourceType());
+        req.setPageUrl(zhiMaReqDto.getPageUrl());
+        req.setSchemaUrl(zhiMaReqDto.getSchemaUrl());
+        DefaultZhimaClient zhimaClient = new DefaultZhimaClient(zhiMaReqDto.getServiceUri(), zhiMaReqDto.getAppId(), zhiMaReqDto.getPrivateKey(), zhiMaReqDto.getZhiMaPublicKey());
+        ZhiMaRepDTO zhimaRepDto = new ZhiMaRepDTO();
+        try {
+            ZhimaCustomerCertifyInitialResponse response = zhimaClient.execute(req);
+            zhimaRepDto.setRtnDate(new Date());
+            zhimaRepDto.setRtnStatus(response.isSuccess() ? TradeStatusEnum.SUCCESS : TradeStatusEnum.FAIL);
+            zhimaRepDto.setRtnContent(response.getBody());
+            zhimaRepDto.setErrorCode(response.getErrorCode());
+            zhimaRepDto.setErrorMessage(response.getErrorMessage());
+            zhimaRepDto.setToken(response.getToken());
+        } catch (ZhimaApiException e) {
+            zhimaRepDto.setRtnStatus(TradeStatusEnum.FAIL);
+            zhimaRepDto.setErrorMessage(e.getMessage());
         }
-        return sbud.toString();
+        return zhimaRepDto;
+    }
+    /**
+     * 芝麻认证服务引导认证接口
+     * @param zhimaReqDto
+     * @return rtnObj {@link ZhiMaRepDTO}
+     */
+    public ZhiMaRepDTO certifyApply(ZhiMaReqDTO zhimaReqDto) {
+        ZhiMaRepDTO zhimaRepDto = new ZhiMaRepDTO();
+        ZhimaCustomerCertifyApplyRequest zhimaRequest = new ZhimaCustomerCertifyApplyRequest();
+        zhimaRequest.setApiVersion(zhimaReqDto.getVersion());
+        zhimaRequest.setChannel(zhimaReqDto.getChannel());
+        zhimaRequest.setPlatform(zhimaReqDto.getPlateform());
+        zhimaRequest.setExtParams(zhimaReqDto.getExtParams());
+        zhimaRequest.setToken(zhimaReqDto.getExtDataMap().get("ext_token"));
+        DefaultZhimaClient zhimaClient = new DefaultZhimaClient(zhimaReqDto.getServiceUri(), zhimaReqDto.getAppId(), zhimaReqDto.getPrivateKey(), zhimaReqDto.getZhiMaPublicKey());
+        try {
+            ZhimaCustomerCertifyApplyResponse zhimaResponse = zhimaClient.execute(zhimaRequest);
+            zhimaRepDto.setRtnStatus(zhimaResponse.isSuccess() ? TradeStatusEnum.SUCCESS : TradeStatusEnum.FAIL);
+            zhimaRepDto.setRtnContent(zhimaResponse.getBody());
+            zhimaRepDto.setRtnDate(new Date());
+            zhimaRepDto.setErrorCode(zhimaResponse.getErrorCode());
+            zhimaRepDto.setErrorMessage(zhimaResponse.getErrorMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            zhimaRepDto.setRtnStatus(TradeStatusEnum.FAIL);
+            zhimaRepDto.setErrorMessage(e.getMessage());
+        }
+        return zhimaRepDto;
     }
 }
