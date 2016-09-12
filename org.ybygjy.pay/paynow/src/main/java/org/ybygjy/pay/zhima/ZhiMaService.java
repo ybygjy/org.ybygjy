@@ -69,12 +69,10 @@ public class ZhiMaService {
         zhimaRequest.setToken(zhimaReqDto.getExtDataMap().get("ext_token"));
         DefaultZhimaClient zhimaClient = new DefaultZhimaClient(zhimaReqDto.getServiceUri(), zhimaReqDto.getAppId(), zhimaReqDto.getPrivateKey(), zhimaReqDto.getZhiMaPublicKey());
         try {
-            ZhimaCustomerCertifyApplyResponse zhimaResponse = zhimaClient.execute(zhimaRequest);
-            zhimaRepDto.setRtnStatus(zhimaResponse.isSuccess() ? TradeStatusEnum.SUCCESS : TradeStatusEnum.FAIL);
-            zhimaRepDto.setRtnContent(zhimaResponse.getBody());
+            String rtnUrl = zhimaClient.generatePageRedirectInvokeUrl(zhimaRequest);
+            zhimaRepDto.setRtnStatus(TradeStatusEnum.SUCCESS);
+            zhimaRepDto.setRtnContent(rtnUrl);
             zhimaRepDto.setRtnDate(new Date());
-            zhimaRepDto.setErrorCode(zhimaResponse.getErrorCode());
-            zhimaRepDto.setErrorMessage(zhimaResponse.getErrorMessage());
         } catch (Exception e) {
             e.printStackTrace();
             zhimaRepDto.setRtnStatus(TradeStatusEnum.FAIL);

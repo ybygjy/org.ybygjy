@@ -12,6 +12,14 @@
 	<name>paynow</name>
 	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 	<build>
 		<finalName>paynow</finalName>
 		<plugins>
