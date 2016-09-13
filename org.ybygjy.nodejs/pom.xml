@@ -12,7 +12,9 @@
     <packaging>pom</packaging>
     <name>nodejs</name>
     <modules>
+    	<!-- 
         <module>nodejs-service</module>
+    	 -->
         <module>nodejs-web</module>
     </modules>
 </project>
