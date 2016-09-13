@@ -10,7 +10,6 @@ import com.antgroup.zmxy.openplatform.api.DefaultZhimaClient;
 import com.antgroup.zmxy.openplatform.api.ZhimaApiException;
 import com.antgroup.zmxy.openplatform.api.request.ZhimaCustomerCertifyApplyRequest;
 import com.antgroup.zmxy.openplatform.api.request.ZhimaCustomerCertifyInitialRequest;
-import com.antgroup.zmxy.openplatform.api.response.ZhimaCustomerCertifyApplyResponse;
 import com.antgroup.zmxy.openplatform.api.response.ZhimaCustomerCertifyInitialResponse;
 
 /**
@@ -79,5 +78,26 @@ public class ZhiMaService {
             zhimaRepDto.setErrorMessage(e.getMessage());
         }
         return zhimaRepDto;
+    }
+    /**
+     * 芝麻认证回调
+     * @param zhimaReqDto
+     * @return
+     */
+    public ZhiMaRepDTO callback(ZhiMaReqDTO zhimaReqDto) {
+        ZhiMaRepDTO zhimaRep = new ZhiMaRepDTO();
+        zhimaRep.setRtnDate(new Date());
+        DefaultZhimaClient zhimaClient = new DefaultZhimaClient(zhimaReqDto.getServiceUri(), zhimaReqDto.getAppId(), zhimaReqDto.getPrivateKey(), zhimaReqDto.getZhiMaPublicKey());
+        try {
+            String rtnStr = zhimaClient.decryptAndVerifySign(zhimaReqDto.getExtDataMap().get("data"), zhimaReqDto.getExtDataMap().get("sign"));
+            zhimaRep.setRtnContent(rtnStr);
+            zhimaRep.setRtnStatus(TradeStatusEnum.SUCCESS);
+        } catch (ZhimaApiException e) {
+            e.printStackTrace();
+            zhimaRep.setRtnStatus(TradeStatusEnum.FAIL);
+            zhimaRep.setErrorCode(e.getErrCode());
+            zhimaRep.setErrorMessage(e.getErrMsg());
+        }
+        return zhimaRep;
     }
 }

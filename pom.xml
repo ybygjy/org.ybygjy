@@ -7,7 +7,22 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<name>org.ybygjy</name>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env.name>dev</env.name>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 	<build>
+		<filters>
+			<filter>${basedir}/../../src/main/filters/${env.name}/filter-globals.properties</filter>
+			<filter>${basedir}/../../src/main/filters/${env.name}/filter-${project.name}.properties</filter>
+		</filters>
 		<resources>
 			<!-- 保证所有的resources下的配置文件能被编译打包 -->
 			<resource>

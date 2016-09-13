@@ -14,5 +14,5 @@ buildNumber.properties
 **/.DS_Store
 **/.classpath
 */bin/
-**/pay-now.properties
 **/*.class
+src/filters/**.*
