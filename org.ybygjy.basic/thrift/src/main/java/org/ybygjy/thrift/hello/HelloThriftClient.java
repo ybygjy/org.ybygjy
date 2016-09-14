@@ -2,6 +2,7 @@ package org.ybygjy.thrift.hello;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 
@@ -17,7 +18,8 @@ public class HelloThriftClient {
      */
     public static void main(String[] args) {
         try {
-            TTransport transport = new TSocket("localhost", 7911);
+//            TTransport transport = new TSocket("localhost", 7911);
+            TTransport transport = new TFramedTransport(new TSocket("localhost", 10005));
             transport.open();
             //传输协议为TBinaryProtocol
             TProtocol protocol = new TBinaryProtocol(transport);

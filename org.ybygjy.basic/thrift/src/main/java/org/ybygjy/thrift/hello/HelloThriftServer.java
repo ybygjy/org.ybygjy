@@ -1,12 +1,11 @@
 package org.ybygjy.thrift.hello;
 
-import org.apache.thrift.TProcessor;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TBinaryProtocol.Factory;
+import org.apache.thrift.server.TNonblockingServer;
+import org.apache.thrift.server.TNonblockingServer.Args;
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TThreadPoolServer;
-import org.apache.thrift.server.TThreadPoolServer.Args;
-import org.apache.thrift.transport.TServerSocket;
+import org.apache.thrift.transport.TNonblockingServerSocket;
+import org.apache.thrift.transport.TNonblockingServerTransport;
+import org.apache.thrift.transport.TTransportException;
 import org.ybygjy.thrift.hello.HelloThrift.Iface;
 
 /**
@@ -21,15 +20,25 @@ public class HelloThriftServer {
      * @param args
      */
     public static void main(String[] args) {
+//        try {
+//            TServerSocket serverSocket = new TServerSocket(7911);
+//            //协议工厂
+//            Factory protocolFactory = new TBinaryProtocol.Factory();
+//            TProcessor processor = new HelloThrift.Processor<Iface>(new HelloThriftServiceImpl());
+//            TServer server = new TThreadPoolServer(new Args(serverSocket).processor(processor).protocolFactory(protocolFactory));
+//            System.out.println("Starting the thrift server!");
+//            server.serve();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        TNonblockingServerTransport serverTransport;
         try {
-            TServerSocket serverSocket = new TServerSocket(7911);
-            //协议工厂
-            Factory protocolFactory = new TBinaryProtocol.Factory();
-            TProcessor processor = new HelloThrift.Processor<Iface>(new HelloThriftServiceImpl());
-            TServer server = new TThreadPoolServer(new Args(serverSocket).processor(processor).protocolFactory(protocolFactory));
-            System.out.println("Starting the thrift server!");
-            server.serve();
-        } catch (Exception e) {
+            serverTransport = new TNonblockingServerSocket(10005);
+            HelloThrift.Processor<Iface> processor = new HelloThrift.Processor<Iface>(new HelloThriftServiceImpl());
+            TServer tServer = new TNonblockingServer(new Args(serverTransport).processor(processor));
+            System.out.println("Start Server on port 10005");
+            tServer.serve();
+        } catch (TTransportException e) {
             e.printStackTrace();
         }
     }
