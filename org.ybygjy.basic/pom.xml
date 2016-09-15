@@ -16,5 +16,6 @@
         <module>network</module>
         <module>thrift</module>
         <module>jvm</module>
+        <module>spring</module>
     </modules>
 </project>
