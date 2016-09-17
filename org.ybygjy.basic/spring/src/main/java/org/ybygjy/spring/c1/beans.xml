@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+	<bean id="mappings"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties">
+			<value>
+				jdbc.driver.className=com.mysql.jdbc.Driver
+				jdbc.url=jdbc:mysql://localhos:3306/mydb
+			</value>
+		</property>
+	</bean>
+	<bean id="defUser" class="org.ybygjy.spring.c1.entity.User" scope="singleton" lazy-init="true">
+		<property name="userNo" value="10001"></property>
+		<property name="userName" value="XiaoHuang"></property>
+	</bean>
+	<bean id="user01" class="org.ybygjy.spring.c1.entity.User" scope="prototype" lazy-init="true">
+		<constructor-arg index="0" value="10002"></constructor-arg>
+		<constructor-arg index="1" value="XiaoMing"></constructor-arg>
+	</bean>
+	<bean id="user02" class="org.ybygjy.spring.c1.entity.User" scope="prototype">
+		<constructor-arg name="userNo" value="10003"></constructor-arg>
+		<constructor-arg name="userName" value="XiaoWang"></constructor-arg>
+	</bean>
+	<bean id="user03" class="org.ybygjy.spring.c1.entity.User" scope="prototype">
+		<constructor-arg type="int" value="10004"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="XiaoWu"></constructor-arg>
+	</bean>
+	<bean id="user04" class="org.ybygjy.spring.c1.entity.User" scope="prototype">
+		<constructor-arg type="int" value="10004"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="XiaoWu"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="HangZhou West"></constructor-arg>
+	</bean>
+	<bean id="user05" class="org.ybygjy.spring.c1.entity.User" scope="prototype">
+		<constructor-arg type="int" value="10005"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="XiaoWu"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="HangZhou West"></constructor-arg>
+		<property name="phoneNumbers">
+			<array>
+				<value>010-63798288</value>
+				<value>010-63798287</value>
+				<value>010-63798286</value>
+			</array>
+		</property>
+	</bean>
+	<bean id="user06" class="org.ybygjy.spring.c1.entity.UserFactory"
+		factory-method="getUserInstance"></bean>
+	<bean id="user07" class="org.ybygjy.spring.c1.entity.User"
+		factory-bean="userFactory" factory-method="buildUser">
+		<constructor-arg name="userNo" value="10006"></constructor-arg>
+		<constructor-arg name="userName" value="XiaoLiu"></constructor-arg>
+	</bean>
+	<bean id="user08" class="org.ybygjy.spring.c1.entity.User">
+		<property name="userNo" value="10007"></property>
+		<property name="userName" value="XiaoZhao"></property>
+		<property name="order" ref="order01"></property>
+	</bean>
+	<bean id="order01" class="org.ybygjy.spring.c1.entity.Order">
+		<property name="user">
+			<ref bean="user08" />
+		</property>
+		<property name="orderNo" value="10001"></property>
+		<property name="orderAmount" value="100000"></property>
+		<property name="buyerObj">
+			<idref bean="user08" />
+		</property>
+		<property name="vendorLists">
+			<props>
+				<prop key="vendor.beijing">北京供应商</prop>
+				<prop key="vendor.tianjin">天津供应商</prop>
+				<prop key="vendor.liaoning">辽宁供应商</prop>
+				<prop key="vendor.shandong">山东供应商</prop>
+			</props>
+		</property>
+		<property name="expressPath">
+			<list>
+				<value>美国->香港</value>
+				<value>香港->广州</value>
+				<value>广州->云南</value>
+				<value>云南->桂林</value>
+			</list>
+		</property>
+		<property name="extAttr">
+			<map>
+				<entry key="黑" value="颜色"></entry>
+				<entry key="白" value="颜色"></entry>
+				<entry key="灰" value="颜色"></entry>
+				<entry key="S" value="尺码"></entry>
+				<entry key="L" value="尺码"></entry>
+			</map>
+		</property>
+		<property name="promotions">
+			<set>
+				<value>满50包邮</value>
+				<value>Ｍ件N折</value>
+				<value>满减</value>
+				<value>满赠</value>
+				<value>加价购</value>
+				<value>套装</value>
+			</set>
+		</property>
+	</bean>
+	<bean name="user09" class="org.ybygjy.spring.c1.entity.User"
+		p:userName="P_UserName" p:userNo="10008" autowire="byType"
+		 autowire-candidate="true">
+		<property name="phoneNumbers">
+			<list>
+				<value>12345678</value>
+				<value>22345678</value>
+				<value>32345678</value>
+				<value>42345678</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="userFactory" class="org.ybygjy.spring.c1.entity.UserFactory" depends-on="userDao" lazy-init="true"/>
+	<bean id="userDao" class="org.ybygjy.spring.c1.dao.impl.UserDaoImpl4MySql" lazy-init="true">
+		<constructor-arg index="0" ref="defUser"></constructor-arg>
+	</bean>
+	<bean id="userService" class="org.ybygjy.spring.c1.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<import resource="beans-dao.xml" />
+</beans>

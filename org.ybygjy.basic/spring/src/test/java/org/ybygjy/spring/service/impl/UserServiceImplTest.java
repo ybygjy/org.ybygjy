@@ -5,17 +5,17 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ybygjy.spring.dao.UserDao;
-import org.ybygjy.spring.dao.impl.UserDaoImpl4MySql;
-import org.ybygjy.spring.service.UserService;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.ybygjy.spring.c1.entity.User;
 
 /**
  * @author WangYanCheng
  * @version 2016年9月15日
  */
 public class UserServiceImplTest {
-    private UserService userService;
-    private UserDao userDao;
+    private ApplicationContext context;
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     }
@@ -26,8 +26,7 @@ public class UserServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        this.userService = new UserServiceImpl();
-        this.userDao = new UserDaoImpl4MySql();
+        this.context = new ClassPathXmlApplicationContext(new String[]{"org/ybygjy/spring/c1/beans.xml"});
     }
 
     @After
@@ -36,7 +35,13 @@ public class UserServiceImplTest {
 
     @Test
     public void testGetUser() {
-        this.userService.setUserDao(this.userDao);
-        this.userService.getUser();
+        String[] userBeanNames = this.context.getBeanNamesForType(User.class);
+        for(String userBeanName : userBeanNames) {
+            System.out.println(this.context.getBean(userBeanName));
+        }
+//        UserService userService = (UserService) this.context.getBean("userService");
+//        User userEntity = userService.getUser(10001);
+//        System.out.println(userEntity);
+//        Assert.assertNotNull(userEntity);
     }
 }
