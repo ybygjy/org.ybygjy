@@ -17,4 +17,12 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>btraceMonitor</servlet-name>
+		<servlet-class>org.ybygjy.spring.web.BTraceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>btraceMonitor</servlet-name>
+		<url-pattern>/btrace</url-pattern>
+	</servlet-mapping>
 </web-app>
