@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class BTraceServlet extends HttpServlet {
-
     /**
      * serial number
      */
