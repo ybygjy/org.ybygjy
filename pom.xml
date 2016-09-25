@@ -6,7 +6,7 @@
 	<artifactId>org.ybygjy</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>org.ybygjy</name>
+	<name>org.ybygjy</name> 
 	<build>
 		<resources>
 			<!-- 保证所有的resources下的配置文件能被编译打包 -->
