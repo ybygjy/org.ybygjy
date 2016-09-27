@@ -2,5 +2,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="loginAction" class="org.ybygjy.web.LoginAction" scope="request"/>
+	<bean id="loginAction" class="org.ybygjy.spring.web.LoginAction" scope="request"/>
+	<bean id="loginActionSession" class="org.ybygjy.spring.web.LoginAction" scope="session"/>
+	<bean id="globalAction" class="org.ybygjy.spring.web.LoginAction" scope="globalSession"/>
+	<bean id="applicationAction" class="org.ybygjy.spring.web.LoginAction" scope="application"/>
+	<bean id="userDao" class="org.ybygjy.spring.web.dao.UserDao" scope="singleton"/>
+	<bean id="userService" class="org.ybygjy.spring.web.service.UserService" scope="singleton">
+		<property name="userDao" ref="userDao"/>
+	</bean>
 </beans>
