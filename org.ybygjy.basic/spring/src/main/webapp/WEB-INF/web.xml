@@ -32,6 +32,11 @@
 		<servlet-name>btraceMonitor</servlet-name>
 		<url-pattern>/btrace</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>jsp</servlet-name>
+		<url-pattern>*.jspf</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</servlet-mapping>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/errorpage/404.jsp</location>

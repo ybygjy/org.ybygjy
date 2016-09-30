@@ -1,4 +1,3 @@
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,15 +6,12 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
+		<h1>接收跳转传递的信息</h1>
 		<div>
 			<ul>
-				<li>${name }</li>
-				<li>${Date }</li>
+				<li><%=request.getParameter("forward_param1") %></li>
+				<li><%=request.getParameter("forward_param2") %></li>
 			</ul>
 		</div>
-		<div>
-			<a href="${pageContext.request.contextPath }/pagecontext/pageContext03.jsp">GO</a>
-		</div>
-
 	</body>
 </html>

@@ -12,8 +12,8 @@
 			pageContext.setAttribute("Date", new Date(), PageContext.REQUEST_SCOPE);
 		%>
 		<%
-			pageContext.setAttribute("name", pageContext.getAttribute("name"), PageContext.SESSION_SCOPE);
-			pageContext.setAttribute("Date", pageContext.getAttribute("Date"), PageContext.SESSION_SCOPE);
+			pageContext.setAttribute("name", "UserName", PageContext.SESSION_SCOPE);
+			pageContext.setAttribute("Date", "Date", PageContext.SESSION_SCOPE);
 		%>
 		<div>
 			<ul>
