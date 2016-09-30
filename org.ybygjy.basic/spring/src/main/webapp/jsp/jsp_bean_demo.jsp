@@ -17,7 +17,8 @@
 			<jsp:setProperty property="age" name="userBean" value="15"/>
 		</div>
 		<div>
-			<span><a href="jsp_bean_demo.jsp">GO</a></span>
+			<div><span><a href="jsp_bean_demo.jsp">GO</a></span></div>
+			<div><span><a href="jsp_bean_demo_property.jsp?name=${userBean.name }&age=${userBean.age }&no=${userBean.no }">Bean Property Inject</a></span></div>
 		</div>
 		<div>
 			<h4>Bean Info</h4>
@@ -26,6 +27,8 @@
 					<li>${userBean.no }</li>
 					<li>${userBean.name }</li>
 					<li>${userBean.age }</li>
+					<li>${userBean.addresses }</li>
+					<li><jsp:getProperty name="userBean" property="addresses"/></li>
 				</ul>
 			</div>
 		</div>
