@@ -1,25 +1,83 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/tx_order?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=round"/>
-		<property name="username" value=""/>
-		<property name="password" value=""/>
-		<property name="password" value=""/>
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/db_order?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=round" />
+		<property name="username" value="tx_writer" />
+		<property name="password" value="W#1^iPowSQPsd" />
 		<!-- 连接池初始连接 -->
-		<property name="initialSize" value="10"/>
+		<property name="initialSize" value="10" />
 		<!-- 最大并发活跃连接数 -->
-		<property name="maxActive" value="300"/>
+		<property name="maxActive" value="300" />
 		<!-- 超时等待时间(毫秒) -->
-		<property name="maxWait" value="30000"/>
+		<property name="maxWait" value="30000" />
 		<!-- 最大空闲连接 -->
-		<property name="maxIdle" value="20"/>
+		<property name="maxIdle" value="20" />
 		<!-- 最小空闲连接 -->
-		<property name="minIdle" value="5"/>
+		<property name="minIdle" value="5" />
 		<!-- 自动回收超时链接 -->
-		<property name="removeAbandoned" value="true"/>
+		<property name="removeAbandoned" value="true" />
 		<!-- 连接超时时间(秒) -->
-		<property name="removeAbandonedTimeout" value="30"/>
+		<property name="removeAbandonedTimeout" value="30" />
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>true</value>
+		</property>
+		<property name="testOnReturn">
+			<value>false</value>
+		</property>
+		<property name="validationQuery">
+			<value>select 1</value>
+		</property>
+		<property name="numTestsPerEvictionRun">
+			<value>20</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>1800000</value>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:org/ybygjy/spring/orderservice/mybatis-config.xml" />
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg>
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+	<!--  
+	<bean id="userDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="userDaoTarget"/>
+		<property name="proxyInterfaces" value="org.ybygjy.spring.orderservice.dao.BaseDao"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	-->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg>
+			<ref bean="dataSource"/>
+		</constructor-arg>
+	</bean>
+	<bean id="userDao4JdbcTemplate" class="org.ybygjy.spring.orderservice.dao.impl.SysUserDaoImpl4JDBCTemplate">
+		<constructor-arg>
+			<ref bean="jdbcTemplate"/>
+		</constructor-arg>
 	</bean>
 </beans>

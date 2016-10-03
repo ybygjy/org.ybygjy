@@ -60,15 +60,19 @@ create table t_customer (
 ) engine=InnoDB default charset=utf8;
 create table t_sys_user (
 	id bigint unsigned not null auto_increment primary key comment '主键',
-	user_no varchar(80) not null comment '雇员工号',
+	user_no varchar(80) not null unique comment '雇员工号',
 	user_name varchar(80) not null comment '雇员名称',
+	password varchar(20) not null comment '密码串',
+	user_phone varchar(20) default '' comment '联系电话',
+	user_email varchar(40) default '' comment '邮箱',
+	user_wechart varchar(40) default '' comment '微信',
+	user_qq varchar(20) default '' comment 'QQ',
 	user_role varchar(80) not null comment '权限标识',
 	state_flag int unsigned default 10 comment '状态{10:正常;20:其它}',
-	mtime timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	ctime timestamp not null default CURRENT_TIMESTAMP
+	mtime timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	ctime timestamp default CURRENT_TIMESTAMP
 ) engine=InnoDB default charset=utf8;
 
-insert into t_sys_user(user_no, user_name, user_role, state_flag) values('10001', '管理员', 'SYS_MGR',10);
+insert into t_sys_user(user_no, user_name, password, user_role, state_flag) values('10001', '管理员', '12345678', 'SYS_MGR',10);
 
-create user tx_writer identified by password 'W#1^iPowSQPsd' password expire never account unlock;
-grant ALL on db_order.* to 'tx_writer'@'localhost';
+grant select,insert,update,delete,create,drop on db_order.* to 'tx_writer'@'localhost' identified by 'W#1^iPowSQPsd';
