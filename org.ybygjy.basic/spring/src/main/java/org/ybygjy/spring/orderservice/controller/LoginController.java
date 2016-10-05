@@ -15,8 +15,8 @@ import org.ybygjy.spring.orderservice.entity.SysUser;
 public class LoginController {
     @Autowired
     private SysUserDao sysUserDao;
-    private static final String loginUri = "redirect:/amazeui/login.html";
-    private static final String welcomeUri = "/amazeui/admin-index.html";
+    private static final String loginUri = "/amazeui/login.jsp";
+    private static final String welcomeUri = "/amazeui/admin-index.jsp";
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public ModelAndView displayLogin(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView(loginUri);

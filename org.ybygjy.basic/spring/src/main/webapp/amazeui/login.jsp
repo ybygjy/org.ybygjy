@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head lang="en">
@@ -37,15 +38,15 @@
 		</div>
 		<div class="am-g">
 		  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
-		    <form id="dataForm" method="post" class="am-form" action="/spring/login" enctype="application/x-www-form-urlencoded">
+		    <form id="dataForm" method="post" class="am-form" action="/spring/login">
 		      <label for="user_no">工号:</label>
-		      <input type="text" id="user_no" value="" name="user_no">
+		      <input type="text" id="user_no" value="88086" name="user_no">
 		      <br>
 		      <label for="email">邮箱:</label>
-		      <input type="text" id="email" value="" name="user_email">
+		      <input type="text" id="email" value="88086@163.com" name="user_email">
 		      <br>
 		      <label for="password">密码:</label>
-		      <input type="password" id="password" value="" name="password">
+		      <input type="password" id="password" value="123456" name="password">
 		      <br>
 		      <label for="remember-me">
 		        <input id="remember-me" type="checkbox">
