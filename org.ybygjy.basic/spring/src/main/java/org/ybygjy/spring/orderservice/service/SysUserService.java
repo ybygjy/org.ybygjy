@@ -18,7 +18,7 @@ public class SysUserService {
         sysUser.setUserNo(dataMap.get("user_no"));
         sysUser.setUserRole(dataMap.get("user_role"));
         sysUser.setStateFlag(Integer.parseInt(dataMap.get("state_flag")));
-        int rtnFlag = sysUserDao.insert(sysUser);
+        int rtnFlag = sysUserDao.saveOrUpdate(sysUser);
         return (rtnFlag == 1);
     }
     public boolean deleteSysUser(Map<String, String> dataMap) {

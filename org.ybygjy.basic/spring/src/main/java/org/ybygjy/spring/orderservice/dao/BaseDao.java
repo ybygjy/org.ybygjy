@@ -9,17 +9,11 @@ import java.util.List;
  */
 public interface BaseDao<T> {
     /**
-     * 增
-     * @param obj
-     * @return
+     * saveOrUpdate
+     * @param t
+     * @return rtnFlag
      */
-    public int insert(T obj);
-    /**
-     * 改
-     * @param obj
-     * @return
-     */
-    public int update(T obj);
+    public int saveOrUpdate(T t);
     /**
      * ID查
      * @param id

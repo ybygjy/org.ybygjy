@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 import org.ybygjy.spring.orderservice.dao.BaseDao;
 import org.ybygjy.spring.orderservice.entity.SysUser;
 
@@ -16,27 +18,24 @@ import org.ybygjy.spring.orderservice.entity.SysUser;
  * @author WangYanCheng
  * @version 2016年10月2日
  */
+@Repository
 public class SysUserDaoImpl4JDBCTemplate implements BaseDao<SysUser> {
+    @Autowired
     private JdbcOperations jdbcTemplate;
     private static final String INSERT_SYSUSER = "INSERT T_SYS_USER(USER_NO,USER_NAME,USER_ROLE,PASSWORD,STATE_FLAG) VALUES(?,?,?,?,?)";
     private static final String UPDATE_SYSUSER = "UPDATE T_SYS_USER WHERE SET USER_NO=?,USER_NAME=?,USER_ROLE=?,PASSWORD=?,STATE_FLAG=? WHERE ID=?";
     private static final String DELETE_SYSUSER = "DELETE T_SYS_USER WHERE ID=?";
     private static final String SELECT_SYSUSER = "SELECT * FROM T_SYS_USER a WHERE 1=1 ";
-    
-    public SysUserDaoImpl4JDBCTemplate(JdbcOperations jdbcTemplate) {
-        super();
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
-    public int insert(SysUser obj) {
-        int flag = this.jdbcTemplate.update(INSERT_SYSUSER, obj.getUserNo(), obj.getUserName(), obj.getUserRole(), obj.getPassword(), obj.getStateFlag());
+    public int saveOrUpdate(SysUser obj) {
+        int flag = -1;
+        if (obj.getId() > 0) {
+            flag = this.jdbcTemplate.update(INSERT_SYSUSER, obj.getUserNo(), obj.getUserName(), obj.getUserRole(), obj.getPassword(), obj.getStateFlag());
+        } else {
+            flag = this.jdbcTemplate.update(UPDATE_SYSUSER, obj.getUserNo(), obj.getUserName(), obj.getUserRole(), obj.getPassword(), obj.getStateFlag(), obj.getId());
+        }
         return flag;
-    }
-
-    @Override
-    public int update(SysUser obj) {
-        return this.jdbcTemplate.update(UPDATE_SYSUSER, obj.getUserNo(), obj.getUserName(), obj.getUserRole(), obj.getPassword(), obj.getStateFlag(), obj.getId());
     }
 
     @Override

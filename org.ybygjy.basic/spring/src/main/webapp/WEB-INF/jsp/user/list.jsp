@@ -3,8 +3,7 @@
 <%@page import="org.ybygjy.spring.web.entity.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="/errorpage/error.jsp"%>
 <%@ include file="/common/header.jspf" %>
-<!-- jsp:include 指令要求资源必须是jsp 如果是其它类型则会原样输出 -->
-<jsp:include page="/common/taglibs.jsp"></jsp:include>
+<%@ include file="/common/taglibs.jsp" %>
 <%
 	List<User> userList = (List<User>) request.getAttribute("userList");
 	for (int i = 0; i < userList.size(); i++) {

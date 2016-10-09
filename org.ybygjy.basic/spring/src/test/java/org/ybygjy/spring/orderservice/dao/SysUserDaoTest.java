@@ -55,7 +55,7 @@ public class SysUserDaoTest {
             sysUser.setUserRole("SYS_USER");
             sysUser.setModifyTime(new Date());
             sysUser.setCreateTime(new Date());
-            int result = sysUserDao.insert(sysUser);
+            int result = sysUserDao.saveOrUpdate(sysUser);
             Assert.assertEquals(result, 1);
         }
     }
@@ -73,7 +73,7 @@ public class SysUserDaoTest {
             sysUser.setStateFlag(20);
             sysUser.setModifyTime(new Date());
             sysUser.setCreateTime(new Date());
-            int result = sysUserDao.update(sysUser);
+            int result = sysUserDao.saveOrUpdate(sysUser);
             Assert.assertEquals(result, 1);
         }
     }

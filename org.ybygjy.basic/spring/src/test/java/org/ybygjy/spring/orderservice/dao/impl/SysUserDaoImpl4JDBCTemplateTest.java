@@ -1,7 +1,5 @@
 package org.ybygjy.spring.orderservice.dao.impl;
 
-import static org.junit.Assert.fail;
-
 import java.util.List;
 
 import junit.framework.Assert;
@@ -46,7 +44,7 @@ public class SysUserDaoImpl4JDBCTemplateTest {
         sysUser.setPassword("123456");
         sysUser.setUserRole("SYS_USER");
         sysUser.setStateFlag(10);
-        int rtnFlag = sysUserDao.insert(sysUser);
+        int rtnFlag = sysUserDao.saveOrUpdate(sysUser);
         Assert.assertEquals(rtnFlag, 1);
     }
 
@@ -61,7 +59,7 @@ public class SysUserDaoImpl4JDBCTemplateTest {
         obj = this.sysUserDao.selectOne(obj);
         if (null != obj) {
             obj.setStateFlag(20);
-            int rtnFlag = this.sysUserDao.update(obj);
+            int rtnFlag = this.sysUserDao.saveOrUpdate(obj);
             Assert.assertEquals(rtnFlag, 1);
         }
     }

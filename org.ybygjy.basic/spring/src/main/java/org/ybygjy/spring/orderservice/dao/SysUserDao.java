@@ -22,16 +22,14 @@ public class SysUserDao implements BaseDao<SysUser> {
     public SysUserDao() {
         this.clazz = SysUser.class;
     }
+    
     @Override
-    public int insert(SysUser obj) {
-        return this.sqlSession.insert(this.clazz.getSimpleName() + "Mapper.insert", obj);
-    }
-    @Override
-    public int update(SysUser obj) {
-        if (null != obj) {
-            throw new RuntimeException("HelloException");
+    public int saveOrUpdate(SysUser t) {
+        if (t.getId() > 0) {
+            return this.sqlSession.insert(this.clazz.getSimpleName() + "Mapper.insert", t);
+        } else {
+            return this.sqlSession.update(this.clazz.getSimpleName() + "Mapper.update", t);
         }
-        return this.sqlSession.update(this.clazz.getSimpleName() + "Mapper.update", obj);
     }
     @Override
     public SysUser findById(Object id) {
