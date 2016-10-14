@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.ybygjy.spring.orderservice.dao.impl.OrderDaoImpl4JDBCTemplate;
 import org.ybygjy.spring.orderservice.entity.Order;
@@ -21,7 +22,7 @@ import org.ybygjy.spring.orderservice.entity.Order;
 public class OrderController {
     @Autowired
     private OrderDaoImpl4JDBCTemplate orderDao;
-    @RequestMapping("/")
+    @RequestMapping("/list")
     public ModelAndView listOrder(ModelAndView mv) {
         List<Order> orderList = this.orderDao.select(null);
         mv.addObject("orderList", orderList);
@@ -38,20 +39,23 @@ public class OrderController {
     @RequestMapping(value="/saveOrder", method=RequestMethod.POST)
     public ModelAndView saveOrder(@ModelAttribute Order order) {
         this.orderDao.saveOrUpdate(order);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("/order/list");
     }
     @RequestMapping("/deleteOrder")
-    public ModelAndView deleteOrder(long orderId) {
+    public ModelAndView deleteOrder(@RequestParam("order_id")long orderId) {
         Order order = new Order();
         order.setId(orderId);
         this.orderDao.delete(order);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("/order/list");
     }
     @RequestMapping("/editOrder")
-    public ModelAndView editOrder(long orderId) {
+    public ModelAndView editOrder(@RequestParam("order_id")long orderId) {
         Order order = new Order();
         order.setId(orderId);
         order = this.orderDao.findById(order);
+        if (null == order) {
+            throw new RuntimeException("订单不存在！");
+        }
         ModelAndView mv = new ModelAndView("/order/OrderForm");
         mv.addObject("order", order);
         return mv;

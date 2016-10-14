@@ -68,6 +68,7 @@ SysUser sysUserList = (SysUser) request.getAttribute("currentUser");
             <li><a href="amazeui/admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
           </ul>
         </li>
+        <li><a href="/spring/order/list"><span class="am-icon-table"></span> 订单管理</a></li>
         <li><a href="amazeui/admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
         <li><a href="amazeui/admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
         <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>

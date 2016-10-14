@@ -20,8 +20,25 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
     private JdbcTemplate jdbcTemplate;
     
     @Override
-    public Order findById(Object id) {
-        return null;
+    public Order findById(Order obj) {
+        String sqlTmpl = "SELECT * FROM t_order WHERE id=?";
+        return this.jdbcTemplate.query(sqlTmpl, new Object[]{obj.getId()}, new ResultSetExtractor<Order>(){
+            @Override
+            public Order extractData(ResultSet rs) throws SQLException, DataAccessException {
+                if (!rs.next()) {
+                    return null;
+                }
+                Order order = new Order();
+                order.setId(rs.getLong("id"));
+                order.setOrderNo(rs.getString("order_no"));
+                order.setOrderAmount(rs.getDouble("order_amount"));
+                order.setOrderFlag(rs.getInt("order_flag"));
+                order.setOrderRemark(rs.getString("order_remark"));
+                order.setOrderMtime(new Date(rs.getDate("order_mtime").getTime()));
+                order.setOrderCtime(new Date(rs.getDate("order_ctime").getTime()));
+                return order;
+            }
+        });
     }
 
     @Override
@@ -52,7 +69,7 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
     @Override
     public Order selectOne(Order obj) {
         String sqlTmpl = "SELECT * FROM t_order where order_no=?";
-        this.jdbcTemplate.query(sqlTmpl, new Object[]{obj.getOrderNo()}, new ResultSetExtractor<Order>(){
+        return this.jdbcTemplate.query(sqlTmpl, new Object[]{obj.getOrderNo()}, new ResultSetExtractor<Order>(){
             public Order extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next()) {
                     Order order = new Order();
@@ -68,7 +85,6 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
                 return null;
             }
         });
-        return null;
     }
 
     @Override

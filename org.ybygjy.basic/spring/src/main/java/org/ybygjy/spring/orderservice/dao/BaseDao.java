@@ -19,7 +19,7 @@ public interface BaseDao<T> {
      * @param id
      * @return
      */
-    public T findById(Object id);
+    public T findById(T obj);
     /**
      * 删除
      * @param obj
