@@ -9,6 +9,7 @@ public class Order {
     private String orderNo;
     private double orderAmount;
     private int orderFlag;
+    private String buyerName;
     private long buyerId;
     private long salesId;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -77,6 +78,13 @@ public class Order {
     }
     public void setOrderRemark(String orderRemark) {
         this.orderRemark = orderRemark;
+    }
+    
+    public String getBuyerName() {
+        return buyerName;
+    }
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
     }
     @Override
     public String toString() {

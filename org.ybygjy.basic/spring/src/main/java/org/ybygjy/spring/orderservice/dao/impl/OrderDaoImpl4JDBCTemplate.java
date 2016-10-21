@@ -92,7 +92,7 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
         int rtnFlag = -1;
         if (t.getId() > 0) {
             String sqlTmpl = "UPDATE t_order SET order_no=?,order_amount=?,order_flag=?,buyer_id=?,sales_id=?,send_time=?,order_remark=? where id=?";
-            rtnFlag = this.jdbcTemplate.update(sqlTmpl, t.getOrderNo(), t.getOrderAmount(), t.getOrderFlag(), t.getBuyerId(), t.getSendTime(), t.getOrderRemark(), t.getId());
+            rtnFlag = this.jdbcTemplate.update(sqlTmpl, t.getOrderNo(), t.getOrderAmount(), t.getOrderFlag(), t.getBuyerId(), t.getSalesId(), t.getSendTime(), t.getOrderRemark(), t.getId());
         } else {
             String sqlTmpl = "INSERT INTO t_order(order_no,order_amount,order_flag,buyer_id,sales_id,send_time,order_remark) values(?,?,?,?,?,?,?)";
             rtnFlag = this.jdbcTemplate.update(sqlTmpl, t.getOrderNo(), t.getOrderAmount(), t.getOrderFlag(), t.getBuyerId(), t.getSalesId(), t.getSendTime(), t.getOrderRemark());

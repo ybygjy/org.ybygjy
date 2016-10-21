@@ -32,9 +32,9 @@ public class SysUserDao implements BaseDao<SysUser> {
         }
     }
     @Override
-    public SysUser findById(Object id) {
+    public SysUser findById(SysUser sysUser) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("id", id);
+        paramMap.put("id", sysUser.getId());
         return this.sqlSession.selectOne(this.clazz.getSimpleName() + "Mapper.select", paramMap);
     }
     @Override

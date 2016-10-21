@@ -1,5 +1,6 @@
 package org.ybygjy.spring.orderservice.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,11 @@ public class OrderController {
     }
     @RequestMapping(value="/saveOrder", method=RequestMethod.POST)
     public ModelAndView saveOrder(@ModelAttribute Order order) {
+        if (order.getSendTime() == null) {
+            order.setSendTime(new Date());
+        }
         this.orderDao.saveOrUpdate(order);
-        return new ModelAndView("/order/list");
+        return this.listOrder(new ModelAndView());
     }
     @RequestMapping("/deleteOrder")
     public ModelAndView deleteOrder(@RequestParam("order_id")long orderId) {
