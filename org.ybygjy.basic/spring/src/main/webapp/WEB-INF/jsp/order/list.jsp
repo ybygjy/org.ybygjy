@@ -23,11 +23,6 @@
 					<option value="option1">One</option>
 					<option value="option2">One</option>
 					<option value="option3">One</option>
-					<option value="option4">One</option>
-					<option value="option5">One</option>
-					<option value="option6">One</option>
-					<option value="option7">One</option>
-					<option value="option8">One</option>
 				</select>
 			</div>
 		</div>
@@ -72,9 +67,9 @@
 							<td>${order.buyerId }</td>
 							<td>${order.salesId }</td>
 							<td>${order.orderRemark }</td>
-							<td>${order.sendTime }</td>
-							<td>${order.orderMtime }</td>
-							<td>${order.orderCtime }</td>
+							<td><fmt:formatDate value="${order.sendTime }" pattern="yyyy-MM-dd"/></td>
+							<td><fmt:formatDate value="${order.orderMtime }" pattern="yyyy-MM-dd"/></td>
+							<td><fmt:formatDate value="${order.orderCtime }" pattern="yyyy-MM-dd"/></td>
 							<td>
 								<a href="/spring/order/editOrder?order_id=${order.id }">编辑</a>
 								<a href="/spring/order/deleteOrder?order_id=${order.id }">删除</a>

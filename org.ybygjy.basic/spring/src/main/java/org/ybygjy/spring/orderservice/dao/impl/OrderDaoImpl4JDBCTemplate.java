@@ -28,15 +28,7 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
                 if (!rs.next()) {
                     return null;
                 }
-                Order order = new Order();
-                order.setId(rs.getLong("id"));
-                order.setOrderNo(rs.getString("order_no"));
-                order.setOrderAmount(rs.getDouble("order_amount"));
-                order.setOrderFlag(rs.getInt("order_flag"));
-                order.setOrderRemark(rs.getString("order_remark"));
-                order.setOrderMtime(new Date(rs.getDate("order_mtime").getTime()));
-                order.setOrderCtime(new Date(rs.getDate("order_ctime").getTime()));
-                return order;
+                return entityMapping4ResultSet(rs);
             }
         });
     }
@@ -52,35 +44,18 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
         String sqlTmpl = "SELECT * FROM t_order";
         List<Order> rtnList = this.jdbcTemplate.query(sqlTmpl, new RowMapper<Order>(){
             public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Order order = new Order();
-                order.setId(rs.getLong("id"));
-                order.setOrderNo(rs.getString("order_no"));
-                order.setOrderAmount(rs.getDouble("order_amount"));
-                order.setOrderFlag(rs.getInt("order_flag"));
-                order.setOrderRemark(rs.getString("order_remark"));
-                order.setOrderMtime(new Date(rs.getDate("order_mtime").getTime()));
-                order.setOrderCtime(new Date(rs.getDate("order_ctime").getTime()));
-                return order;
+                return OrderDaoImpl4JDBCTemplate.this.entityMapping4ResultSet(rs);
             }
         });
         return rtnList;
     }
-
     @Override
     public Order selectOne(Order obj) {
         String sqlTmpl = "SELECT * FROM t_order where order_no=?";
         return this.jdbcTemplate.query(sqlTmpl, new Object[]{obj.getOrderNo()}, new ResultSetExtractor<Order>(){
             public Order extractData(ResultSet rs) throws SQLException, DataAccessException {
                 if (rs.next()) {
-                    Order order = new Order();
-                    order.setId(rs.getLong("id"));
-                    order.setOrderNo(rs.getString("order_no"));
-                    order.setOrderAmount(rs.getDouble("order_amount"));
-                    order.setOrderFlag(rs.getInt("order_flag"));
-                    order.setOrderRemark(rs.getString("order_remark"));
-                    order.setOrderMtime(new Date(rs.getDate("order_mtime").getTime()));
-                    order.setOrderCtime(new Date(rs.getDate("order_ctime").getTime()));
-                    return order;
+                    return OrderDaoImpl4JDBCTemplate.this.entityMapping4ResultSet(rs);
                 }
                 return null;
             }
@@ -99,5 +74,26 @@ public class OrderDaoImpl4JDBCTemplate implements BaseDao<Order> {
         }
         return rtnFlag;
     }
-    
+    /**
+     * JDBC ResultSet 与 DTO实体的映射
+     * @param rs {@link ResultSet}
+     * @return rtnObj
+     * @throws SQLException {@link SQLException}
+     */
+    private Order entityMapping4ResultSet(ResultSet rs) throws SQLException {
+        Order order = new Order();
+        order.setId(rs.getLong("id"));
+        order.setOrderNo(rs.getString("order_no"));
+        order.setOrderAmount(rs.getDouble("order_amount"));
+        order.setOrderFlag(rs.getInt("order_flag"));
+        order.setBuyerId(rs.getLong("buyer_id"));
+        order.setBuyerName(rs.getString("buyer_name"));
+        order.setSalesName(rs.getString("sales_name"));
+        order.setSalesId(rs.getLong("sales_id"));
+        order.setOrderRemark(rs.getString("order_remark"));
+        order.setSendTime(new Date(rs.getDate("send_time").getTime()));
+        order.setOrderMtime(new Date(rs.getDate("order_mtime").getTime()));
+        order.setOrderCtime(new Date(rs.getDate("order_ctime").getTime()));
+        return order;
+    }    
 }

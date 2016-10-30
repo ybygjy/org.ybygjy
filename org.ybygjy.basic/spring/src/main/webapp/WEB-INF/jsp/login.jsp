@@ -74,6 +74,11 @@
 				$(this).prop('disabled',true);
 				alert("forgetPasswordBtn::" + e);
 			});
+			$(document).keypress(function(e){
+				if (e.keyCode == '13') {
+					$('#dataForm').submit();
+				}
+			});
 		});
 	</script>
 </html>
