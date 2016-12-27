@@ -80,7 +80,9 @@ public class SysUserDaoTest {
 
     @Test
     public void testFindById() {
-        SysUser sysUser = sysUserDao.findById(1L);
+        SysUser sysUser = new SysUser();
+        sysUser.setId(1L);
+        sysUser = sysUserDao.findById(sysUser);
 System.out.println(sysUser);
         Assert.assertNotNull(sysUser);
     }

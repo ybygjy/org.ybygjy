@@ -24,6 +24,7 @@ public class FileUploadController {
         model.addAttribute(new UploadItem());
         return "/orderservice/fileupload";
     }
+
     @RequestMapping(method=RequestMethod.POST)
     public String processFileUpload(UploadItem uploadItem, BindingResult result) {
         int index = 0;

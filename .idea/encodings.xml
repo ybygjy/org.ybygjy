@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic/algorithm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic/jvm" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic/network" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic/spring" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.basic/thrift" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.hessian" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.nodejs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.nodejs/nodejs-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.pay" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.ybygjy.pay/paynow" charset="UTF-8" />
+  </component>
+</project>

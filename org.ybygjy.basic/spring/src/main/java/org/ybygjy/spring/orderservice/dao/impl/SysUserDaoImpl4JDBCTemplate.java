@@ -39,7 +39,7 @@ public class SysUserDaoImpl4JDBCTemplate implements BaseDao<SysUser> {
     }
 
     @Override
-    public SysUser findById(Object id) {
+    public SysUser findById(SysUser id) {
         SysUser sysUser = this.jdbcTemplate.queryForObject("select * from t_sys_user a where a.id=?", new RowMapper<SysUser>() {
             @Override
             public SysUser mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -52,7 +52,7 @@ public class SysUserDaoImpl4JDBCTemplate implements BaseDao<SysUser> {
                 sysUser.setCreateTime(new Date(rs.getDate("ctime").getTime()));
                 return sysUser;
             }
-        }, id);
+        }, id.getId());
         return sysUser;
     }
 
