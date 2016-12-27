@@ -16,3 +16,4 @@ buildNumber.properties
 */bin/
 **/*.class
 **/src/main/filters/**/*.properties
+**/.idea/**
