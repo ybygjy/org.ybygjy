@@ -12,6 +12,7 @@
 <script src="/spring/amazeui/assets/js/jquery.min.js"></script>
 <!--<![endif]-->
 <script src="/spring/amazeui/assets/js/amazeui.min.js"></script>
+<script src="${ctx}/amazeui/assets/js/amazeui.datetimepicker.min.js"></script>
 <script src="/spring/amazeui/assets/js/app.js"></script>
 </body>
 </html>

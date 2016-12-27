@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<configuration debug="true">
+	<property name="normal-pattern" value="%d{ISO8601} [%-5level] [%thread] |%L|%-40.40logger{0}|---%msg%n" />
+	<appender name="stdout_log" class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+			<!--  
+			<pattern>${normal-pattern}</pattern>
+			-->
 		</encoder>
 	</appender>
+	<logger name="stdout" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout_log"/>
+	</logger>
+	<logger name="org.springframework.jdbc.core" level="DEBUG">
+		<appender-ref ref="stdout_log"></appender-ref>
+	</logger>
 	<root level="debug">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="stdout_log" />
 	</root>
 </configuration>

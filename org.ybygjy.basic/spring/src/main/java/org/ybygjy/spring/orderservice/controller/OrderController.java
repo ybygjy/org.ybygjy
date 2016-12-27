@@ -1,5 +1,6 @@
 package org.ybygjy.spring.orderservice.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.ybygjy.spring.orderservice.dao.impl.OrderDaoImpl4JDBCTemplate;
 import org.ybygjy.spring.orderservice.entity.Order;
+import org.ybygjy.spring.orderservice.util.StringUtils;
 
 /**
  * 订单管理
@@ -38,15 +40,21 @@ public class OrderController {
     }
     @RequestMapping(value="/saveOrder", method=RequestMethod.POST)
     public ModelAndView saveOrder(@ModelAttribute Order order) {
+        if (order.getSendTime() == null) {
+            order.setSendTime(new Date());
+        }
+        if (order.getOrderNo() == null) {
+            order.setOrderNo(StringUtils.getInstance().getTSRandomNo());
+        }
         this.orderDao.saveOrUpdate(order);
-        return new ModelAndView("/order/list");
+        return this.listOrder(new ModelAndView());
     }
     @RequestMapping("/deleteOrder")
     public ModelAndView deleteOrder(@RequestParam("order_id")long orderId) {
         Order order = new Order();
         order.setId(orderId);
         this.orderDao.delete(order);
-        return new ModelAndView("/order/list");
+        return this.listOrder(new ModelAndView());
     }
     @RequestMapping("/editOrder")
     public ModelAndView editOrder(@RequestParam("order_id")long orderId) {

@@ -9,13 +9,15 @@ public class Order {
     private String orderNo;
     private double orderAmount;
     private int orderFlag;
+    private String buyerName;
     private long buyerId;
     private long salesId;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private String salesName;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date sendTime;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date orderMtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date orderCtime;
     private String orderRemark;
     public long getId() {
@@ -78,10 +80,23 @@ public class Order {
     public void setOrderRemark(String orderRemark) {
         this.orderRemark = orderRemark;
     }
+    
+    public String getBuyerName() {
+        return buyerName;
+    }
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+    public String getSalesName() {
+        return salesName;
+    }
+    public void setSalesName(String salesName) {
+        this.salesName = salesName;
+    }
     @Override
     public String toString() {
-        return "Order [id=" + id + ", orderNo=" + orderNo + ", orderAmount=" + orderAmount + ", orderFlag=" + orderFlag + ", buyerId="
-                + buyerId + ", salesId=" + salesId + ", sendTime=" + sendTime + ", orderMtime=" + orderMtime + ", orderCtime=" + orderCtime
-                + ", orderRemark=" + orderRemark + "]";
+        return "Order [id=" + id + ", orderNo=" + orderNo + ", orderAmount=" + orderAmount + ", orderFlag=" + orderFlag + ", buyerName="
+                + buyerName + ", buyerId=" + buyerId + ", salesId=" + salesId + ", salesName=" + salesName + ", sendTime=" + sendTime
+                + ", orderMtime=" + orderMtime + ", orderCtime=" + orderCtime + ", orderRemark=" + orderRemark + "]";
     }
 }
