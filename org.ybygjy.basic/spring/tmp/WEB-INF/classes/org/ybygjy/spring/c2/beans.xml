@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="accountingHelper" class="org.ybygjy.spring.c2.AccountingHelper" scope="prototype"></bean>
+    <bean id="asyncAccounting" class="org.ybygjy.spring.c2.impl.AsyncAccounting">
+    	<property name="accountingHelper" ref="accountingHelper"></property>
+    </bean>
+    <bean id="generalAccounting" class="org.ybygjy.spring.c2.impl.GeneralAccounting">
+    	<lookup-method name="getAccountingHelper" bean="accountingHelper"/>
+    </bean>
+    <bean id="myValueCalculator" class="org.ybygjy.spring.c2.rm.MyValueCalculator">
+    	<replaced-method name="computeValue" replacer="replacementComputeValue"></replaced-method>
+    </bean>
+    <bean id="replacementComputeValue" class="org.ybygjy.spring.c2.rm.ReplacementComputeValue"/>
+</beans>
