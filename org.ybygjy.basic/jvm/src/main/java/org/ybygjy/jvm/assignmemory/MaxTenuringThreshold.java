@@ -10,11 +10,11 @@ package org.ybygjy.jvm.assignmemory;
 public class MaxTenuringThreshold {
     private static int _1MB = 1024 * 1024;
     public static void main(String[] args) {
-        byte[] buffer01 = new byte[_1MB / 3];
-        byte[] buffer02 = new byte[_1MB * 5];
-        byte[] buffer03 = new byte[_1MB * 4];
-        buffer03 = null;
-        buffer03 = new byte[_1MB * 4];
-        System.out.println("OK");
+        byte[] allocation1, allocation2, allocation3;
+        allocation1 = new byte[_1MB / 4];
+        allocation2 = new byte[_1MB * 4];
+        allocation3 = new byte[_1MB * 4];
+        allocation3 = null;
+        allocation3 = new byte[_1MB * 4];
     }
 }
