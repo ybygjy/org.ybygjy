@@ -8,7 +8,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Enum
+ * Enum实践
+ * -http://www.ibm.com/developerworks/cn/java/j-lo-enum/
+ * -相比普通常量Enum解决了哪些问题？Enum提供了稳定的类型约束不会出现常量越界、非法等不安全的类型、常量属于编译期常量编译完成后常量直接会被值类型替代，类型调试无指意性
  */
 public class EnumTest {
     private Client client = new Client();

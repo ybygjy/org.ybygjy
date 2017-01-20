@@ -10,9 +10,9 @@ public class ObjectAgeTenuringThreshold {
     private static int _1MB = 1024 * 1024;
     public static void main(String[] args) {
         byte[] allocation1, allocation2, allocation3, allocation4, allocation5;
-        allocation1 = new byte[0];
+        allocation1 = new byte[_1MB / 4];
         //allocation1 + allocation2 大于survivor空间一半
-        allocation2 = new byte[0];
+        allocation2 = new byte[_1MB / 4];
         allocation3 = new byte[_1MB * 4];
         allocation4 = new byte[_1MB * 4];
         allocation4 = null;
