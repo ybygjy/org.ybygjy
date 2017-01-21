@@ -16,6 +16,6 @@ public class PretenureThreshold {
      */
     public static void main(String[] args) {
         byte[] buff = new byte[4 * _1MB];
-        System.out.println("OK");
+        System.out.println("COMPLETE");
     }
 }
