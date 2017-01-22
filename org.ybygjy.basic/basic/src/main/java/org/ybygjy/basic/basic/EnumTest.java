@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.EnumMap;
+import java.util.EnumSet;
 
 /**
  * Enum实践
@@ -23,12 +25,25 @@ public class EnumTest {
         }
     }
     public static void main(String[] args) {
-        new EnumTest().doWork(Integer.parseInt(args[0]));
-        try {
-            Thread.currentThread().sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        EnumMap enumMap = new EnumMap(WeekDayEnum.class);
+        enumMap.put(WeekDayEnum.Fri, "");
+        enumMap.put(WeekDayEnum.Sat, "");
+        System.out.println(enumMap);
+        EnumSet<WeekDayEnum> weekDayEnum = EnumSet.allOf(WeekDayEnum.class);
+        for (WeekDayEnum weekDayEnum1 : weekDayEnum) {
+            System.out.println(weekDayEnum1);
         }
+        System.out.println("");
+        weekDayEnum = weekDayEnum.complementOf(EnumSet.of(WeekDayEnum.Fri, WeekDayEnum.Mon));
+        for (WeekDayEnum weekDayEnum1 : weekDayEnum) {
+            System.out.println(weekDayEnum1);
+        }
+//        new EnumTest().doWork(Integer.parseInt(args[0]));
+//        try {
+//            Thread.currentThread().sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
     enum WeekDayEnum {
         Mon(1), Tue(2), Wed(3), Thu(4), Fri(5), Sat(6), Sun(7);
