@@ -4,6 +4,7 @@ import java.util.BitSet;
 
 /**
  * BloomFilter 多hash函数映射的快速查找算法
+ * <p>http://www.cnblogs.com/heaad/archive/2011/01/02/1924195.html</p>
  * Created by leye on 2017/1/23.
  */
 public class BloomFilter {
