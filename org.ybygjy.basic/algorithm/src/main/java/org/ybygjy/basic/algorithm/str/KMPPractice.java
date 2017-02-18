@@ -61,13 +61,52 @@ public class KMPPractice {
         }
 
         /**
-         * next[j] == k;
-         * @param sub
-         * @return
+         * next[j] == k; how to get the next array is the most important thing in the KMP
+         * @param sub sub
+         * @return rtnIntArr
          */
         public int[] next(String sub) {
-
+            int[] next = new int[sub.length()];
+            char[] c = sub.toCharArray();
+            int j = 0;
+            int k = -1;
+            while (j < c.length - 1) {
+                if (k == -1 || c[j] == c[k]) {
+                    next[j] = k;
+                    j++;
+                    k++;
+                } else {
+                    k = next[k];
+                }
+            }
+            return next;
         }
+        public int kmp(String str, String sub) {
+            char[] c1 = str.toCharArray();
+            char[] c2 = sub.toCharArray();
+            int i = 0;
+            int j = 0;
+            int[] next = next(sub);
+            while (i < c1.length && j < c2.length) {
+                if (j == -1 || c1[i] == c2[j]) {
+                    i++;
+                    j++;
+                } else {
+                    //i need not to come back
+                    j = next[j];
+                }
+            }
+            //if successful
+            if (j == c2.length) {
+                //return the first character's index
+                return  i - j;
+            } else {
+                return -1;
+            }
+        }
+    }
+    public int kmpWork(String str, String sub) {
+        
     }
     public static void main(String[] args) {
         String t = "ABNCDFDADFDSA";
