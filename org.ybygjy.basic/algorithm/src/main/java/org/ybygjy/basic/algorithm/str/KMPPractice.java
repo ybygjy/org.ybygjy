@@ -37,7 +37,6 @@ public class KMPPractice {
         }
 
         /**
-         * next[j] == k; how to get the next array is the most important thing in the KMP
          * @param sub sub
          * @return rtnIntArr
          */
