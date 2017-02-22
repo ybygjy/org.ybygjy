@@ -1,92 +1,47 @@
 package org.ybygjy.basic.algorithm.str;
 
-/**
- * 实践KMP算法
- * Created by leye on 2017/2/17.
- */
 public class KMPPractice {
-    class KMPAlgorithm {
-        /**
-         * Brute-Force
-         * @param str str
-         * @param sub sub
-         * @return rtnFlag
-         */
-        public int bf(String str, String sub) {
-            char cstr[] = str.toCharArray();
-            char csub[] = sub.toCharArray();
-            int i = 0;//Main string's index
-            int j = 0;//Sub string's index
-            while (j < cstr.length && j < csub.length) {
-                if (cstr[i] == csub[j]) {
-                    i++;
-                    j++;
-                } else {
-                    //if not match, the main string's index must be come back
-                    j = 0;
-                    i = i - j + 1;
-                }
+    public static int[] getNext(String b) {
+        int len=b.length();
+        int j=0;
+
+        int next[]=new int[len+1];//next表示长度为i的字符串前缀和后缀的最长公共部分，从1开始
+        next[0]=next[1]=0;
+        //i表示字符串的下标，从0开始
+        for(int i=1;i<len;i++) {
+            //j在每次循环开始都表示next[i]的值，同时也表示需要比较的下一个位置
+            while(j>0&&b.charAt(i)!=b.charAt(j)) {
+                j=next[j];
             }
-            //if successful
-            if (j == csub.length) {
-                //return the first character's index
-                return i - j;
-            } else {
-                return -1;
+            if(b.charAt(i)==b.charAt(j)) {
+                j++;
             }
+            next[i+1]=j;
         }
 
-        /**
-         * @param sub sub
-         * @return rtnIntArr
-         */
-        public int[] next(String sub) {
-            int[] next = new int[sub.length()];
-            char[] c = sub.toCharArray();
-            int j = 0;
-            int k = -1;
-            while (j < c.length - 1) {
-                if (k == -1 || c[j] == c[k]) {
-                    next[j] = k;
-                    j++;
-                    k++;
-                } else {
-                    k = next[k];
-                }
-            }
-            return next;
-        }
-        public int kmp(String str, String sub) {
-            char[] c1 = str.toCharArray();
-            char[] c2 = sub.toCharArray();
-            int i = 0;
-            int j = 0;
-            int[] next = next(sub);
-            while (i < c1.length && j < c2.length) {
-                if (j == -1 || c1[i] == c2[j]) {
-                    i++;
-                    j++;
-                } else {
-                    //i need not to come back
-                    j = next[j];
-                }
-            }
-            //if successful
-            if (j == c2.length) {
-                //return the first character's index
-                return  i - j;
-            } else {
-                return -1;
-            }
-        }
+        return next;
     }
-
-    public static int kmpPower(String str, String sub) {
-        return new KMPPractice().new KMPAlgorithm().kmp(str, sub);
+    public void search(String src, String find, int[] next) {
+        int j = 0;
+        for (int i = 0; i < src.length(); i++) {
+            while (j > 0 && src.charAt(i) != find.charAt(j)) {
+                j = next[j];
+            }
+            if (src.charAt(i) == find.charAt(j)) {
+                j ++;
+            }
+            if (j == find.length()) {
+                System.out.println("find at position:" + (i - j));
+                System.out.println(src.subSequence(i - j + 1, i + 1));
+                j = next[j];
+            }
+        }
     }
     public static void main(String[] args) {
-        String t = "ABNCDFDADFDSA";
-        String p = "FDADF";
-        System.out.println(KMPPractice.kmpPower(t, p));
+        String t = "AABFDABFDADFDSA";
+        String p = "AADADFD";
+        int[] rtnArr = KMPPractice.getNext(p);
+        KMPPractice kmpPractice = new KMPPractice();
+        kmpPractice.search(t, p, rtnArr);
     }
 }
