@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic;
+package org.ybygjy.basic.basic.tenum;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,7 +12,11 @@ import java.util.EnumSet;
 /**
  * Enum实践
  * -http://www.ibm.com/developerworks/cn/java/j-lo-enum/
- * -相比普通常量Enum解决了哪些问题？Enum提供了稳定的类型约束不会出现常量越界、非法等不安全的类型、常量属于编译期常量编译完成后常量直接会被值类型替代，类型调试无指意性
+ * -传统常量的特征
+ * --类型不安全
+ * --没有命名空间
+ * --一致性差，整形常量属于编译期常量，所以编译过程完成后所有客户端和服务器端引用的地方会直接将整数值写入，这样，当你修改旧的枚举整数值后或增加新的枚举值后，所有引用地方的代码都需要重新编译，否则运行时刻就会出现错误。
+ * --类型无指意性，运行期调试或日志记录中这些常量是以魔术数字的形式体现出来的。
  */
 public class EnumTest {
     private Client client = new Client();
@@ -38,6 +42,8 @@ public class EnumTest {
         for (WeekDayEnum weekDayEnum1 : weekDayEnum) {
             System.out.println(weekDayEnum1);
         }
+        //new EnumTest().doWork(0);
+        new EnumTest().doWork(1);
 //        new EnumTest().doWork(Integer.parseInt(args[0]));
 //        try {
 //            Thread.currentThread().sleep(10000);
