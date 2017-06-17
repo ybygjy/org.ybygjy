@@ -9,6 +9,6 @@
       <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>algorithm</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>algorithm</name>
 </project>

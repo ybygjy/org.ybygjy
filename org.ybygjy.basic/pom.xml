@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <name>basic</name>
     <modules>
+        <module>basic</module>
         <module>algorithm</module>
         <module>network</module>
         <module>thrift</module>
