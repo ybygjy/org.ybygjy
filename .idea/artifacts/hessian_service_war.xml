@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="hessian-service:war">
-    <output-path>$PROJECT_DIR$/org.ybygjy.hessian/hessian-service/target</output-path>
-    <root id="archive" name="hessian-service-0.0.1-0.0.1.war">
-      <element id="artifact" artifact-name="hessian-service:war exploded" />
-    </root>
-  </artifact>
-</component>

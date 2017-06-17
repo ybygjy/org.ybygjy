@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="paynow:war">
-    <output-path>$PROJECT_DIR$/org.ybygjy.pay/paynow/target</output-path>
-    <root id="archive" name="paynow-1.0.0-1.0.0.war">
-      <element id="artifact" artifact-name="paynow:war exploded" />
-    </root>
-  </artifact>
-</component>
