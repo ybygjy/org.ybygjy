@@ -97,7 +97,9 @@
 	</distributionManagement>
 	<modules>
 		<module>org.ybygjy.hessian</module>
+        <!--
 		<module>org.ybygjy.pay</module>
+        -->
 		<module>org.ybygjy.basic</module>
 		<module>org.ybygjy.nodejs</module>
 	</modules>
