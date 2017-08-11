@@ -1,3 +1,5 @@
+package org.ybygjy.basic.basic;
+
 public class AutoInboxAndUnboxTest {
     public static void main(String[] args) {
         Integer a = 1;
