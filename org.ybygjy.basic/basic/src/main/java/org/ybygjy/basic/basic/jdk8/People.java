@@ -5,6 +5,7 @@ import org.ybygjy.basic.basic.serialize.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
@@ -57,8 +58,14 @@ public class People {
         personList.stream().parallel().forEach((p)->{
             System.out.println("Hello:" + p.toString());
         });
+        Optional<Person> optional = personList.stream().findFirst();
+        if (optional.isPresent()) {
+            System.out.println("persion:" + optional);
+        }
+        /*
         people.benchMarkSequential(people.buildBenchMarkData());
         people.benchMarkParallel(people.buildBenchMarkData());
+        */
     }
     public List<String> buildBenchMarkData() {
         List<String> strList = new ArrayList<>();
