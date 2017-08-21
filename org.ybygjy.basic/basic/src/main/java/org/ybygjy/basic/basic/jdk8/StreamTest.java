@@ -3,9 +3,7 @@ package org.ybygjy.basic.basic.jdk8;
 import org.ybygjy.basic.basic.serialize.Gender;
 import org.ybygjy.basic.basic.serialize.Person;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -104,13 +102,116 @@ public class StreamTest<T> {
     }
 
     public void testPeek() {
-        Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3).peek(e ->System.out.println("Filtered value:" + e)).map(String::toUpperCase).peek(e -> System.out.println("Mapped Value:" + e)).collect(Collectors.toList()).stream().forEach(System.out::println);
+        Stream.of("one", "two", "three", "four")
+                .filter(e -> e.length() > 3)
+                .peek(e ->System.out.println("Filtered value:" + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped Value:" + e))
+                .collect(Collectors.toList())
+                .stream()
+                .forEach(System.out::print);
+        Stream.of("A", "B", "C").filter(e->Objects.nonNull(e)).peek(System.out::println).forEach((e)-> System.out.println("H_" + e));
+    }
+    public void testFindFirst() {
+        String str = null;
+        System.out.println("optional present result:" + Optional.ofNullable(str).isPresent());
+        Arrays.asList("A", "C", "B").stream().findFirst().ifPresent((e)->{
+            System.out.println("test find first=>" + e);
+        });
+    }
+    public void testReduce() {
+        String concat = Stream.of("A", "B", "C", "D").reduce("", String::concat);
+        System.out.println("test reduce:" + concat);
+        Double minVal = Stream.of(-1.5, -2.0, -3.0, 0.0, 1.0, 3.0, 9.0).reduce(Double.MAX_VALUE, (a, b)->{
+            return Math.min(a, b);
+        });
+        System.out.println("test reduce minValue:" + minVal);
+        Number sumVal = Stream.of(80, 30.00, 200, 300).reduce(0, (s, a)->{
+            return s.intValue()+a.intValue();
+        });
+        System.out.println("test reduce sumVal:" + sumVal.doubleValue());
+        int val = Stream.of(1, 2, 3, 4).reduce((a, b)->{
+            System.out.printf("test reduce " + a + ":" + b);
+            return a+b;
+        }).get();
+        System.out.println("test reduct=>" + val);
+        concat = Stream.of("A", "B", "C", "E", "T").filter((x)->{
+            return x.hashCode() < 'a';
+        }).reduce(String::concat).get();
+        System.out.println("test reduce=>" + concat);
+    }
+    public void testLimitSkip() {
+        List<Person> persons = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            persons.add(new Person("F_" + i, "L_" + i, i, i%2 == 0 ? Gender.FEMALE : Gender.MALE));
+        }
+        List<String> personSegment = persons.stream().map((p)->{
+            return p.getFirstName() + "_" + p.getLastName() + "_" + p.getAge() + "_" + p.getGender();
+        }).limit(10).skip(5).collect(Collectors.toList());
+        System.out.println("testLimitSkip:" + personSegment);
+
+        persons = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            persons.add(new Person("F_" + i, "L_" + i, i, i%2 == 0 ? Gender.FEMALE : Gender.MALE));
+        }
+        List<Person> personList = persons.stream().sorted((p1, p2)->{
+            return p1.getFirstName().compareTo(p2.getFirstName());
+        }).limit(2).collect(Collectors.toList());
+        System.out.println("test limit and skip:" + personList);
+    }
+    public void testSorted() {
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            personList.add(new Person("F_" + i, "L_" + i, i, i%2 == 0 ? Gender.MALE : Gender.FEMALE));
+        }
+        List<Person> persons = personList.stream().sorted((p1, p2)->{
+            return p1.getGender().compareTo(p2.getGender());
+        }).limit(12).collect(Collectors.toList());
+        System.out.println("test stream sorted:" + persons);
+    }
+    public void testMinMax() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(getClass().getResourceAsStream(getClass().getSimpleName() + ".class"))));
+        int minVal = br.lines().mapToInt(String::length).min().getAsInt();
+        br.close();
+        br = new BufferedReader(new InputStreamReader(new BufferedInputStream(getClass().getResourceAsStream(getClass().getSimpleName() + ".class"))));
+        int maxVal = br.lines().mapToInt((s)->{
+            return s.length();
+        }).max().getAsInt();
+        br.close();
+        System.out.println("minMax:" + maxVal + ",minVal:" + minVal);
+    }
+    public void testDistinct() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(getClass().getSimpleName() + ".class")));
+        br.lines().flatMap((s)->{
+            return Stream.of(s.split("\\s"));
+        }).filter((s)->{
+            return s.length() > 0;
+        }).map(String::toUpperCase).distinct().sorted().collect(Collectors.toList()).stream().forEach(System.out::println);
+        br.close();
+    }
+    public void testStreamMatch() {
+        List<Person> personList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            personList.add(new Person("F_" + i, "L_" + i, i, i%2 == 0 ? Gender.FEMALE : Gender.MALE));
+        }
+        boolean isAllAdult = personList.stream().allMatch((p)->{
+            return p.getAge() > 18;
+        });
+        System.out.println("test stream match AllMatch=>" + isAllAdult);
+        boolean isThereAnyChild = personList.stream().anyMatch((p)->{
+            return p.getAge() < 12;
+        });
+        System.out.println("test stream match AnyMatch=>" + isThereAnyChild);
+        boolean isThereNoneFemale = personList.stream().noneMatch((p)->{
+            return p.getGender() != Gender.FEMALE;
+        });
+        System.out.println("test stream match noneMatch=>" + isThereNoneFemale);
     }
     /**
      * 入口
      * @param args 参数列表
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<Person> dataList = new ArrayList<>();
         dataList.add(new Person("Wang", "YanCheng", 30, Gender.MALE));
         dataList.add(new Person("Liu", "YaYa", 30, Gender.FEMALE));
@@ -133,5 +234,12 @@ public class StreamTest<T> {
         streamTest.testMap();
         streamTest.testFilter();
         streamTest.testPeek();
+        streamTest.testFindFirst();
+        streamTest.testReduce();
+        streamTest.testLimitSkip();
+        streamTest.testSorted();
+        streamTest.testMinMax();
+        streamTest.testDistinct();
+        streamTest.testStreamMatch();
     }
 }
