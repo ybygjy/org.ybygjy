@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -207,6 +208,48 @@ public class StreamTest<T> {
         });
         System.out.println("test stream match noneMatch=>" + isThereNoneFemale);
     }
+    public void testGenerate4Random() {
+        Random seed = new Random();
+        Supplier<Integer> random = seed::nextInt;
+        Stream.generate(random).limit(10).forEach(System.out::println);
+        Stream.generate(()->{
+            return (int)(System.nanoTime() % 100);
+        }).limit(10).forEach(System.out::println);
+    }
+    public void testGenerate4Cust() {
+        Stream.generate(new PersonSupplier()).limit(10).forEach((p)->{
+            System.out.println(p);
+        });
+    }
+    private class PersonSupplier implements Supplier<Person> {
+        private int index = 0;
+        private Random random = new Random();
+        public Person get() {
+            return new Person("Test_" + index, "Test_" + index, index++, index%2 == 0 ? Gender.FEMALE : Gender.MALE);
+        }
+    }
+    private void testStreamIterator() {
+        Stream.iterate(0, n->n+3).limit(10).forEach(x->{
+            System.out.println(x + " ");
+        });
+    }
+    private void testStreamGrouping() {
+        Map<Integer, List<Person>> personGroups = Stream.generate(new PersonSupplier()).limit(100).collect(Collectors.groupingBy((person)->{
+            return person.getGender().hashCode();
+        }));
+        Iterator iterator = personGroups.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, List<Person>> persons = (Map.Entry) iterator.next();
+            System.out.println("Age " + persons.getKey() + ":" + persons.getValue().size());
+        }
+    }
+    private void testStreamPartitioning() {
+        Map<Boolean, List<Person>> children = Stream.generate(new PersonSupplier()).limit(100).collect(Collectors.partitioningBy((person)->{
+            return person.getAge() < 18;
+        }));
+        System.out.println("test stream partitioning, children:" + children.get(true));
+        System.out.println("test stream partitioning, adult:" + children.get(false));
+    }
     /**
      * 入口
      * @param args 参数列表
@@ -241,5 +284,10 @@ public class StreamTest<T> {
         streamTest.testMinMax();
         streamTest.testDistinct();
         streamTest.testStreamMatch();
+        streamTest.testGenerate4Random();
+        streamTest.testGenerate4Cust();
+        streamTest.testStreamIterator();
+        streamTest.testStreamGrouping();
+        streamTest.testStreamPartitioning();
     }
 }
