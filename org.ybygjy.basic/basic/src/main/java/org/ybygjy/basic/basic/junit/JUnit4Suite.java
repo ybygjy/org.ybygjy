@@ -8,6 +8,6 @@ import org.junit.runners.Suite;
  * Created by leye on 2017/7/20.
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses(RegularExpressionTest.class)
+@Suite.SuiteClasses({RegularExpressionTest.class, ParametricRegularExpressionTest.class})
 public class JUnit4Suite {
 }

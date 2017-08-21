@@ -30,6 +30,7 @@ public class ParametricRegularExpressionTest extends RegularExpressionTest {
     }
     @Test
     public void verifyCode() {
+        System.out.println(this.phrase + ":" + this.match);
         Matcher matcher = pattern.matcher(phrase);
         boolean isValid = matcher.matches();
         Assert.assertEquals("Pattern did not validate zip code!", isValid, match);
