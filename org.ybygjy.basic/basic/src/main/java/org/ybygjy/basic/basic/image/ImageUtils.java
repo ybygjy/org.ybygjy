@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Iterator;
@@ -137,7 +138,7 @@ public class ImageUtils {
             bis = new BufferedInputStream(new FileInputStream(srcImg));
             bos = new BufferedOutputStream(new FileOutputStream(destImg));
             BufferedImage bufferedImage = ImageIO.read(srcImg);
-            boolean hasAlpha = bufferedImage.getColorModel().hasAlpha();
+            //boolean hasAlpha = bufferedImage.getColorModel().hasAlpha();
             Iterator<ImageWriter> imageWriterIterator = ImageIO.getImageWritersByFormatName("jpeg");
             if (!imageWriterIterator.hasNext()) {
                 throw new RuntimeException("ImageWriter for JPEG not found!");
@@ -167,6 +168,52 @@ public class ImageUtils {
             }
         }
     }
+
+    /**
+     * 图像圆角
+     * @param srcImg 源文件
+     * @param destImg 目标文件
+     * @param radius 圆角半径
+     */
+    public static void cornerImage(File srcImg, File destImg, int radius) {
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+        try {
+            bis = new BufferedInputStream(new FileInputStream(srcImg));
+            bos = new BufferedOutputStream(new FileOutputStream(destImg));
+            BufferedImage bufferedImage = ImageIO.read(bis);
+            int width = bufferedImage.getWidth();
+            int height = bufferedImage.getHeight();
+            int cornerRadius = radius < 1 ? width / 4 : radius;
+            BufferedImage targetImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D graphics2D = targetImage.createGraphics();
+            graphics2D.setComposite(AlphaComposite.Src);
+            graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            graphics2D.setColor(Color.WHITE);
+            graphics2D.fill(new RoundRectangle2D.Float(0, 0, width, height, cornerRadius, cornerRadius));
+            graphics2D.setComposite(AlphaComposite.SrcAtop);
+            graphics2D.drawImage(bufferedImage, 0, 0, null);
+            graphics2D.dispose();
+            ImageIO.write(targetImage, "PNG", bos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         File srcImg = new File("/Users/leye/Documents/1001.jpg");
         File targetImg = new File("/Users/leye/Documents/1001.compress.jpg");
@@ -174,7 +221,8 @@ public class ImageUtils {
         if (null != imgSize) {
 //            ImageUtils.resizeImage(srcImg, targetImg, imgSize[0]/2, imgSize[1]/2);
 //            ImageUtils.cuttingImage(srcImg, targetImg, 100, 100, 100, 100);
-            ImageUtils.compressImage(srcImg, targetImg, 0.9f);
+//            ImageUtils.compressImage(srcImg, targetImg, 0.9f);
+            ImageUtils.cornerImage(srcImg, targetImg, 100);
             System.out.println("转换完成," + targetImg.getAbsolutePath());
         }
     }
