@@ -8,11 +8,14 @@ import java.util.regex.Pattern;
  */
 public class RegexTest {
     public static void main(String[] args) {
-        String src = "四川省^^^成都市^^^金牛区^^^驷马桥街道^^^普兰县233号^(测试站不要选择）";
-        Pattern pattern = Pattern.compile("^.*\\^{3}(.*)$");
+        String src = "https://page.cainiao.com/yz/activity-20171111-retro_snaker/index.html?actId=##actId##&stationId=##stationId##&_dt_no_comment=false&_wvUseWKWebView=YES";
+        Pattern pattern = Pattern.compile("(##([^#]+)##)");
         Matcher matcher = pattern.matcher(src);
-        while (matcher.find()) {
-            System.out.println(matcher.group(1));
+        while(matcher.find()) {
+            int groupCnt = matcher.groupCount();
+            do {
+                System.out.println(groupCnt + ":" + matcher.group(groupCnt--));
+            } while (groupCnt >= 0);
         }
     }
 }
