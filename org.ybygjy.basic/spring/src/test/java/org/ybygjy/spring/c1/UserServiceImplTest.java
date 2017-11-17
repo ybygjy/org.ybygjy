@@ -1,14 +1,10 @@
-package org.ybygjy.spring.service.impl;
+package org.ybygjy.spring.c1;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.junit.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.ybygjy.spring.c1.entity.User;
+import org.ybygjy.spring.c1.service.UserService;
 
 /**
  * @author WangYanCheng
@@ -16,6 +12,7 @@ import org.ybygjy.spring.c1.entity.User;
  */
 public class UserServiceImplTest {
     private ApplicationContext context;
+    private UserService userService;
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
     }
@@ -27,6 +24,7 @@ public class UserServiceImplTest {
     @Before
     public void setUp() throws Exception {
         this.context = new ClassPathXmlApplicationContext(new String[]{"org/ybygjy/spring/c1/beans.xml"});
+        userService = (UserService) this.context.getBean("userService");
     }
 
     @After
@@ -39,9 +37,12 @@ public class UserServiceImplTest {
         for(String userBeanName : userBeanNames) {
             System.out.println(this.context.getBean(userBeanName));
         }
-//        UserService userService = (UserService) this.context.getBean("userService");
-//        User userEntity = userService.getUser(10001);
-//        System.out.println(userEntity);
-//        Assert.assertNotNull(userEntity);
+        User userEntity = userService.getUser(10001);
+        System.out.println(userEntity);
+        Assert.assertNotNull(userEntity);
+    }
+    @Test
+    public void testModifyUser() {
+        this.userService.motifyUser(null);
     }
 }

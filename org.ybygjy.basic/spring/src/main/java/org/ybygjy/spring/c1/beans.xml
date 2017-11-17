@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
-	default-lazy-init="true">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+    <context:component-scan base-package="org.ybygjy.spring"/>
 	<bean id="mappings"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="properties">
@@ -115,11 +119,12 @@
 		</property>
 	</bean>
 	<bean id="userFactory" class="org.ybygjy.spring.c1.entity.UserFactory" depends-on="userDao" lazy-init="true"/>
-	<bean id="userDao" class="org.ybygjy.spring.c1.dao.impl.UserDaoImpl4MySql" lazy-init="true">
-		<constructor-arg index="0" ref="defUser"></constructor-arg>
-	</bean>
+	<!--<bean id="userDao" class="org.ybygjy.spring.c1.dao.impl.UserDaoImpl4MySql" lazy-init="true">-->
+		<!--<constructor-arg index="0" ref="defUser"></constructor-arg>-->
+	<!--</bean>-->
 	<bean id="userService" class="org.ybygjy.spring.c1.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
 	<import resource="beans-dao.xml" />
+	<import resource="beans-aop.xml"/>
 </beans>
