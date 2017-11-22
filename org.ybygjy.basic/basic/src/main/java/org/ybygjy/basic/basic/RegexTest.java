@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class RegexTest {
     public static void main(String[] args) {
-        String src = "https://page.cainiao.com/yz/activity-20171111-retro_snaker/index.html?actId=##actId##&stationId=##stationId##&_dt_no_comment=false&_wvUseWKWebView=YES";
+        String src = "https://localhost/xyz/xactivity1111-retro_snaker/index.html?actId=##actId##&stationId=##stationId##&_dt_no_comment=false&_wvUseWKWebView=YES";
         Pattern pattern = Pattern.compile("(##([^#]+)##)");
         Matcher matcher = pattern.matcher(src);
         while(matcher.find()) {

@@ -21,8 +21,8 @@ import java.util.Iterator;
  */
 public class HelloPOI {
     public static void main(String[] args) {
-        File file = new File("/Users/leye/1002_project/1015_双11/101_业务数据/20171107_社区二维码站点明细.xlsx");
-        File outputFile = FileSystems.getDefault().getPath("/Users/leye/tmp/", "cainiao_yz_201705_utf8.txt").toFile();
+        File file = new File("xxx.xlsx");
+        File outputFile = FileSystems.getDefault().getPath("~/tmp", "201705_utf8.txt").toFile();
         BufferedWriter bufferedWriter = null;
         FileInputStream fileInputStream = null;
         try {
