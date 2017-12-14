@@ -8,7 +8,7 @@
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>algorithm</artifactId>
+    <artifactId>org.ybygjy.basic.algorithm</artifactId>
     <packaging>jar</packaging>
     <name>algorithm</name>
 </project>

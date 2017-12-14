@@ -9,7 +9,7 @@
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>hessian-test</artifactId>
+	<artifactId>org.ybygjy.hessian.test</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.ybygjy.hessian</groupId>

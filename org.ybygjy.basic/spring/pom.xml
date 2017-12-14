@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<name>spring</name>
-	<artifactId>spring</artifactId>
+	<artifactId>org.ybygjy.basic.spring</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->

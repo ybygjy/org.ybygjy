@@ -8,7 +8,7 @@
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>thrift</artifactId>
+	<artifactId>org.ybygjy.basic.thrift</artifactId>
 	<name>thrift</name>
 	<dependencies>
 		<dependency>

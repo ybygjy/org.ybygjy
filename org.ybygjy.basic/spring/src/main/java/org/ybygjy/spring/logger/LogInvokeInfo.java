@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 封装日志操作
  * Created by leye on 2017/11/22.
  */
-public class LogOperation implements Serializable {
+public class LogInvokeInfo implements Serializable {
     private static final long serialVersionUID = 4514083974947478159L;
     /** 操作类型*/
     private Integer operatorType;
@@ -23,7 +23,7 @@ public class LogOperation implements Serializable {
     /** 操作描述*/
     private String operatorDesc;
 
-    public LogOperation(Integer operatorType, String operatorId, String operatorName) {
+    public LogInvokeInfo(Integer operatorType, String operatorId, String operatorName) {
         this.operatorType = operatorType;
         this.operatorId = operatorId;
         this.operatorName = operatorName;
@@ -31,7 +31,7 @@ public class LogOperation implements Serializable {
         this.callerAppName = LoggerUtils.getApplicationName();
     }
 
-    public LogOperation(Integer operatorType, String operatorId, String operatorName, String callerAppName, String appInvoke) {
+    public LogInvokeInfo(Integer operatorType, String operatorId, String operatorName, String callerAppName, String appInvoke) {
         this.operatorType = operatorType;
         this.operatorId = operatorId;
         this.operatorName = operatorName;
@@ -89,7 +89,7 @@ public class LogOperation implements Serializable {
 
     @Override
     public String toString() {
-        return "LogOperation{" +
+        return "LogInvokeInfo{" +
                 "operatorType=" + operatorType +
                 ", subOperatorType=" + subOperatorType +
                 ", operatorId='" + operatorId + '\'' +

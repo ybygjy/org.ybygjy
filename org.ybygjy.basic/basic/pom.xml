@@ -8,7 +8,7 @@
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>basic</artifactId>
+    <artifactId>org.ybygjy.basic.basic</artifactId>
     <packaging>jar</packaging>
     <name>basic</name>
     <dependencies>
@@ -45,17 +45,17 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.15</version>
+            <version>3.16</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml-schemas</artifactId>
-            <version>3.15</version>
+            <version>3.16</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.15</version>
+            <version>3.16</version>
         </dependency>
     </dependencies>
 </project>

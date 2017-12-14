@@ -8,7 +8,7 @@
 		<version>1.0.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>paynow</artifactId>
+	<artifactId>org.ybygjy.pay.paynow</artifactId>
 	<name>paynow</name>
 	<packaging>war</packaging>
 	<url>http://maven.apache.org</url>

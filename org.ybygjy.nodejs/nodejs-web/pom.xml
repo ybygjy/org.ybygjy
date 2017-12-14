@@ -8,7 +8,7 @@
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <name>nodejs-service</name>
+    <name>org.ybygjy.nodejs.service</name>
     <artifactId>nodejs-service</artifactId>
     <packaging>pom</packaging>
 </project>

@@ -8,7 +8,7 @@
       <version>1.0.0</version>
       <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>network</artifactId>
+    <artifactId>org.ybygjy.basic.network</artifactId>
     <packaging>jar</packaging>
     <name>network</name>
 </project>
