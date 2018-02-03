@@ -10,9 +10,9 @@ public class AtomicReferenceStampTest {
         DBEntity dbEntity = new DBEntity();
         AtomicStampedReference<DBEntity> atomicStampedReference = new AtomicStampedReference<DBEntity>(dbEntity, Integer.MAX_VALUE);
         boolean rtnFlag = atomicStampedReference.attemptStamp(dbEntity, 1);
-        System.out.println(rtnFlag);
-        rtnFlag = atomicStampedReference.attemptStamp(dbEntity, 1);
-        System.out.println(rtnFlag);
+        System.out.println(atomicStampedReference.getStamp());
+        rtnFlag = atomicStampedReference.attemptStamp(dbEntity, 2);
+        System.out.println(atomicStampedReference.getStamp());
     }
     static class DBEntity {
         private String userName;
