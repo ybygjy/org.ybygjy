@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic;
+package org.ybygjy.basic.basic.thread;
 
 /**
  * @author leye

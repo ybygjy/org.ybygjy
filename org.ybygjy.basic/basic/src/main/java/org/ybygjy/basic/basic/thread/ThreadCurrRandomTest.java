@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic;
+package org.ybygjy.basic.basic.thread;
 
 import java.util.ArrayList;
 import java.util.List;
