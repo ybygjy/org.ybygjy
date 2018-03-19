@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic.headfirstdp.mvc;
+package org.ybygjy.basic.basic.headfirstdp.mvc.v1;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,8 +13,6 @@ import java.awt.event.ActionListener;
 public class DJView implements ActionListener, BeatObserver, BPMObserver {
     private BeatModelInterface beatModelInterface;
     private ControllerInterface controllerInterface;
-    private JFrame viewFrame;
-    private JPanel viewPanel;
     private BeatBar beatBar;
     private JLabel bpmOutputLabel;
     private JFrame controlFrame;
@@ -24,8 +22,6 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver {
     private JButton setBPMButton;
     private JButton increaseBPMButton;
     private JButton decreaseBPMButton;
-    private JMenuBar menuBar;
-    private JMenu menu;
     private JMenuItem startMenuItem;
     private JMenuItem stopMenuItem;
 
@@ -36,12 +32,12 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver {
         this.beatModelInterface.registerObserver((BeatObserver) this);
     }
     void createView() {
-        viewPanel = new JPanel(new GridLayout(1, 2));
-        viewFrame = new JFrame("View");
+        JPanel viewPanel = new JPanel(new GridLayout(1, 2));
+        JFrame viewFrame = new JFrame("View");
         viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewFrame.setSize(new Dimension(100, 80));
-        bpmOutputLabel = new JLabel("Offline", SwingConstants.CENTER);
-        beatBar = new BeatBar();
+        JLabel bpmOutputLabel = new JLabel("Offline", SwingConstants.CENTER);
+        BeatBar beatBar = new BeatBar();
         JPanel bpmPanel = new JPanel(new GridLayout(2, 1));
         bpmPanel.add(beatBar);
         bpmPanel.add(bpmOutputLabel);
@@ -56,8 +52,8 @@ public class DJView implements ActionListener, BeatObserver, BPMObserver {
         controlFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         controlFrame.setSize(new Dimension(100, 80));
         controlPanel = new JPanel(new GridLayout(1, 2));
-        menuBar = new JMenuBar();
-        menu = new JMenu("DJ Control");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("DJ Control");
         startMenuItem = new JMenuItem("Start");
         menu.add(startMenuItem);
         startMenuItem.addActionListener(new ActionListener() {

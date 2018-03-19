@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic.headfirstdp.mvc;
+package org.ybygjy.basic.basic.headfirstdp.mvc.v1;
 
 /**
  * @author leye

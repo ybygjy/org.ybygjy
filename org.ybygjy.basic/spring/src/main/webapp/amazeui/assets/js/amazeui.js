@@ -3625,7 +3625,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  // check compatibility with old versions of add to homescreen. Opt-out if an old session is found
+	  // check compatibility with old versions of add to homescreen. Opt-out if an v1 session is found
 	  if (this.getItem('addToHome')) {
 	    this.optOut();
 	  }

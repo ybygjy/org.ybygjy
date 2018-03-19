@@ -1,4 +1,4 @@
-package org.ybygjy.basic.basic.headfirstdp.mvc;
+package org.ybygjy.basic.basic.headfirstdp.mvc.v1;
 
 /**
  * @author leye
@@ -32,14 +32,12 @@ public class BeatController implements ControllerInterface {
 
     @Override
     public void increaseBPM() {
-        int bpm = modelInteface.getBPM();
-        modelInteface.setBPM(bpm + 1);
+        this.setBPM(modelInteface.getBPM() + 1);
     }
 
     @Override
     public void decreaseBPM() {
-        int bpm = modelInteface.getBPM();
-        modelInteface.setBPM(bpm - 1);
+        this.setBPM(modelInteface.getBPM() - 1);
     }
 
     @Override
