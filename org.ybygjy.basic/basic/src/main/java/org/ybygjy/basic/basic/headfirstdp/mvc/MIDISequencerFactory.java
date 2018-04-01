@@ -18,6 +18,16 @@ public class MIDISequencerFactory {
             sequencer.setLoopCount(100000);
             sequencer.open();
             sequencer.addMetaEventListener(metaEventListener);
+            int[] controllers = new int[128];
+            for (int i = 0; i < 128; i++) {
+                controllers[i] = i;
+            }
+            sequencer.addControllerEventListener(new ControllerEventListener() {
+                @Override
+                public void controlChange(ShortMessage event) {
+                    System.out.println(event);
+                }
+            }, controllers);
             sequencer.setTempoInBPM(bpmVal);
             sequencer.setSequence(this.buildSequence());
         } catch (MidiUnavailableException | InvalidMidiDataException e) {
@@ -28,7 +38,7 @@ public class MIDISequencerFactory {
 
     private Sequence buildSequence() throws InvalidMidiDataException {
         Sequence sequence = new Sequence(Sequence.PPQ, 4);
-        int[] trackLists = {35, 0, 46, 0};
+        int[] trackLists = {10, 20, 30, 40, 50, 60, 70, 80, 90};
         sequence.deleteTrack(null);
         this.buildTracks(sequence, trackLists);
         return sequence;

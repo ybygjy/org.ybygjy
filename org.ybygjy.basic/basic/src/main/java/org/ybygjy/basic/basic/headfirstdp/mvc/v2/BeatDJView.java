@@ -46,12 +46,15 @@ public class BeatDJView implements BeatModelObserver {
         public InnerDJView() {
             JPanel viewPanel = new JPanel(new GridLayout(1, 2));
             viewFrame = new JFrame("View");
+            viewFrame.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
             viewFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             viewFrame.setSize(new Dimension(100, 80));
             JLabel bpmOutputLabel = new JLabel("Offline", SwingConstants.CENTER);
             bpmOutputLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
             beatBar = new BeatBar();
             beatBar.setMaximum(100);
+            beatBar.setValue(defBPMVal);
+            beatBar.setForeground(Color.ORANGE);
             JPanel bpmPanel = new JPanel(new GridLayout(2, 1));
             bpmPanel.add(beatBar);
             bpmPanel.add(bpmOutputLabel);

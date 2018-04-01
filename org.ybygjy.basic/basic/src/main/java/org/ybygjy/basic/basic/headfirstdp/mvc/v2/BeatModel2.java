@@ -60,12 +60,12 @@ public class BeatModel2 implements MetaEventListener {
 
     @Override
     public void meta(MetaMessage meta) {
-        if (meta.getType() == 47) {
-            observerList.forEach(s->{
-                s.onChangeStatus(this);
-            });
-            sequencer.start();
-            this.setBPM(getBPMModel2());
-        }
+//        if (meta.getType() == 47) {
+//            observerList.forEach(s->{
+//                s.onChangeStatus(this);
+//            });
+//            sequencer.start();
+//            this.setBPM(getBPMModel2());
+//        }
     }
 }
