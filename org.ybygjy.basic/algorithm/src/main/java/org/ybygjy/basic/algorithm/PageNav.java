@@ -2,7 +2,9 @@ package org.ybygjy.basic.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PageNav {
     /** 总行数*/
@@ -52,6 +54,10 @@ public class PageNav {
     }
 
     public static void main(String[] args) {
+        Set<String> sett = new HashSet<>();
+        sett.add("A");
+        sett.add("B");
+        System.out.println(sett.toString());
         List<Object> dataList = new ArrayList<Object>();
         for (int i = 0; i < 101; i++) {
             dataList.add("D_" + i);
